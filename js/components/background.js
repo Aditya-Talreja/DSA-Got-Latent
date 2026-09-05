@@ -8,7 +8,8 @@ export function createParticles() {
   const container = $('#particles');
   if (!container) return;
 
-  const count = 18;
+  const isMobile = window.innerWidth <= 768;
+  const count = isMobile ? 9 : 18;
   for (let i = 0; i < count; i++) {
     const particle = document.createElement('div');
     particle.className = 'particle';
@@ -30,16 +31,18 @@ export function initSpotlights() {
   const vw = window.innerWidth;
   const vh = window.innerHeight;
 
-  // Preset initial aesthetic stage coordinates (Center, Stage Left, Stage Right)
-  const initialPositions = [
-    { x: vw * 0.5 - 250, y: vh * 0.42 - 250 },  // Center logo
-    { x: vw * 0.22 - 290, y: vh * 0.46 - 290 }, // Stage Left
-    { x: vw * 0.78 - 220, y: vh * 0.38 - 220 }  // Stage Right
-  ];
-
   spotlights.forEach((el, index) => {
     // 1. PIN IMMEDIATELY at initial stage coordinates with NO transition
-    // This happens synchronously at frame 0, so no spotlight is ever stuck at (0,0) or seen jumping!
+    // Dynamic centering based on element's actual rendered size (scaled on mobile)
+    const size = el.offsetWidth || (index === 1 ? 580 : index === 2 ? 440 : 500);
+    const half = size / 2;
+
+    const initialPositions = [
+      { x: vw * 0.5 - half, y: vh * 0.42 - half },  // Center logo
+      { x: vw * 0.22 - half, y: vh * 0.46 - half }, // Stage Left
+      { x: vw * 0.78 - half, y: vh * 0.38 - half }  // Stage Right
+    ];
+
     const initPos = initialPositions[index % initialPositions.length];
     let currentX = initPos.x;
     let currentY = initPos.y;
@@ -50,20 +53,23 @@ export function initSpotlights() {
 
     // Pick a new major destination on stage
     function pickNewTarget() {
-      const size = el.offsetWidth || 500;
+      const curSize = el.offsetWidth || size;
       const curVw = window.innerWidth;
       const curVh = window.innerHeight;
+      const isMobile = curVw <= 768;
 
       // 50% bias towards center stage / golden logo
       const biasCenter = Math.random() < 0.5;
       let targetX, targetY;
 
       if (biasCenter) {
-        targetX = (curVw / 2 - size / 2) + (Math.random() * 260 - 130);
-        targetY = (curVh * 0.42 - size / 2) + (Math.random() * 180 - 90);
+        const spreadX = isMobile ? 120 : 260;
+        const spreadY = isMobile ? 80 : 180;
+        targetX = (curVw / 2 - curSize / 2) + (Math.random() * spreadX - spreadX / 2);
+        targetY = (curVh * 0.42 - curSize / 2) + (Math.random() * spreadY - spreadY / 2);
       } else {
-        targetX = Math.random() * (curVw - size * 0.4) - size * 0.3;
-        targetY = Math.random() * (curVh - size * 0.4) - size * 0.3;
+        targetX = Math.random() * (curVw - curSize * 0.4) - curSize * 0.3;
+        targetY = Math.random() * (curVh - curSize * 0.4) - curSize * 0.3;
       }
 
       return { targetX, targetY };
@@ -99,9 +105,12 @@ export function initSpotlights() {
         }
 
         step++;
-        // Snappy hunting micro-offsets around the spot
-        const jx = (Math.random() - 0.5) * 46; // ±23px
-        const jy = (Math.random() - 0.5) * 36; // ±18px
+        // Snappy hunting micro-offsets around the spot (proportional on mobile)
+        const isMobile = window.innerWidth <= 768;
+        const jxRange = isMobile ? 22 : 46;
+        const jyRange = isMobile ? 18 : 36;
+        const jx = (Math.random() - 0.5) * jxRange;
+        const jy = (Math.random() - 0.5) * jyRange;
         const jitterSpeed = (Math.random() * 60 + 150) / 1000; // 0.15s - 0.21s fast jitter
 
         el.style.transition = `transform ${jitterSpeed}s cubic-bezier(0.25, 0.46, 0.45, 0.94)`;

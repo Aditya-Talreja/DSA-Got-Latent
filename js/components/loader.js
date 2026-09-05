@@ -44,8 +44,8 @@ export function initPreloader() {
   };
 
   Promise.all([
-    preloadImg('images/logo.png'),
-    preloadImg('background/bg.png')
+    preloadImg('images/logo.webp'),
+    preloadImg('background/bg.webp')
   ]).then(() => {
     isPageLoaded = true;
   });

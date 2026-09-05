@@ -68,6 +68,31 @@ html, body {
     -webkit-backface-visibility: hidden !important;
   }
 
+  /* ── 1c. Mobile Spotlights (Relatively Scaled) ──────────── */
+  .spotlight-hole {
+    filter: blur(6px);
+  }
+
+  #spotlight-1 {
+    width: clamp(230px, 56vw, 320px);
+    height: clamp(230px, 56vw, 320px);
+  }
+
+  #spotlight-2 {
+    width: clamp(260px, 64vw, 360px);
+    height: clamp(260px, 64vw, 360px);
+  }
+
+  #spotlight-3 {
+    width: clamp(200px, 48vw, 280px);
+    height: clamp(200px, 48vw, 280px);
+  }
+
+  /* ── 1d. Lightweight Mobile Fireflies (Cap at 9) ───────── */
+  .particle:nth-child(n+10) {
+    display: none !important;
+  }
+
   /* ── 2. Page Sections & Symmetrical Card Boundaries ──── */
   .page-section {
     margin-bottom: 1.5rem;
@@ -86,11 +111,10 @@ html, body {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
-    /* Symmetrical compact shadow that never spills out of viewport */
+    /* 100% Zero-Blur Neo-Brutalist Hard Shadow (Zero GPU blur overhead on mobile) */
     box-shadow:
       4px 4px 0px var(--bc-shadow-color),
-      6px 6px 0px var(--bc-shadow-rim),
-      0 10px 24px rgba(0, 0, 0, 0.75) !important;
+      6px 6px 0px var(--bc-shadow-rim) !important;
     filter: none !important;
   }
 
@@ -575,6 +599,26 @@ html, body {
   .brand-logo {
     max-width: 92vw;
     max-height: 220px;
+  }
+
+  /* ── 1c. Compact Mobile Spotlights ─────────────────────── */
+  .spotlight-hole {
+    filter: blur(5px);
+  }
+
+  #spotlight-1 {
+    width: clamp(190px, 54vw, 250px);
+    height: clamp(190px, 54vw, 250px);
+  }
+
+  #spotlight-2 {
+    width: clamp(220px, 62vw, 280px);
+    height: clamp(220px, 62vw, 280px);
+  }
+
+  #spotlight-3 {
+    width: clamp(170px, 46vw, 220px);
+    height: clamp(170px, 46vw, 220px);
   }
 
   .page-section {
