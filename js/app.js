@@ -3,7 +3,7 @@
    ======================================================== */
 
 import { $ } from './utils/dom.js';
-import { createParticles, initSpotlights } from './components/background.js';
+import { createParticles, initSpotlights, lockMobileBackground } from './components/background.js';
 import { initSeatTracker } from './components/seats.js';
 import { initPreloader } from './components/loader.js';
 import { burstConfetti, fireCornerCannons, burstBehindLogo } from './components/confetti.js';
@@ -16,6 +16,7 @@ function init() {
   // Background visual effects (stage spotlights & floating fireflies)
   createParticles();
   initSpotlights();
+  lockMobileBackground();
 
   // Live seat availability polling (fetches from Google Sheets via Apps Script)
   initSeatTracker(CONFIG.APPS_SCRIPT_URL);

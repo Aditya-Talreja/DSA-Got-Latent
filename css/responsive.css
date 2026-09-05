@@ -1,59 +1,117 @@
 /* ========================================================
-   DSA Got Latent — Responsive Breakpoints & Mobile Optimization
-   Single-Page Portal Layout — Zero Overflow & 60fps Performance
+   DSA Got Latent — Responsive Breakpoints & Mobile Master System
+   Single-Page Portal Layout — Razor-Sharp Alignment & Zero Overflow
    ======================================================== */
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+}
 
 @media (max-width: 768px) {
   :root {
-    --space-2xl: 32px;
-    --space-xl: 24px;
+    --space-2xl: 28px;
+    --space-xl: 20px;
   }
 
+  /* ── 1. Hero Section ───────────────────────────────────── */
   .hero-section {
     min-height: 80svh;
     padding: 1.5rem 1rem;
     margin-top: 0;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .brand-logo {
     max-width: 88vw;
-    max-height: 280px;
+    max-height: 270px;
+    /* Ultra-lightweight single drop shadow: deep contrast, 60/120fps fluid on mobile */
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.92)) !important;
   }
 
+  .brand-logo:hover {
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.92)) !important;
+    transform: none;
+  }
+
+  /* ── 1b. Mobile Fixed Stage Background (Zero Scroll Zoom) ─ */
+  .stage-bg-container {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    width: 100% !important;
+    height: 100lvh !important;
+    min-height: 100% !important;
+    overflow: hidden !important;
+    transform: translate3d(0, 0, 0) !important;
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+  }
+
+  .bg-layer {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 100lvh !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-attachment: scroll !important;
+    transform: translate3d(0, 0, 0) !important;
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+  }
+
+  /* ── 2. Page Sections & Symmetrical Card Boundaries ──── */
   .page-section {
     margin-bottom: 1.5rem;
-    padding: 0 0.5rem;
+    padding: 0 8px !important;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
   }
 
   #team.page-section {
     margin-bottom: 0 !important;
   }
 
-  /* ── 1. Brutalist Card Container (Zero Overflow) ──────── */
   .brutalist-card {
     margin: 0 auto;
     width: 100%;
-    /* Pure GPU box-shadow on mobile to guarantee smooth 60fps scrolling */
+    max-width: 100%;
+    box-sizing: border-box;
+    /* Symmetrical compact shadow that never spills out of viewport */
     box-shadow:
-      6px 6px 0px var(--bc-shadow-color),
-      8px 8px 0px var(--bc-shadow-rim),
-      0 10px 25px rgba(0, 0, 0, 0.75) !important;
+      4px 4px 0px var(--bc-shadow-color),
+      6px 6px 0px var(--bc-shadow-rim),
+      0 10px 24px rgba(0, 0, 0, 0.75) !important;
+    filter: none !important;
   }
 
   .brutalist-card:hover {
-    transform: none; /* Avoid sticky mobile hover state */
+    transform: none;
   }
 
-  /* ── 2. Top Ribbon ─────────────────────────────────────── */
+  /* ── 3. Top Ribbon ─────────────────────────────────────── */
   .brutalist-ribbon {
     padding: 10px 14px;
     font-size: 0.68rem;
     letter-spacing: 0.1em;
+    width: 100%;
+    box-sizing: border-box;
   }
 
-  /* ── 3. Headline Block & "Register Your Team" Fit ──────── */
+  /* ── 4. Headline Block & Perfectly Fitted Titles ──────── */
   .brutalist-headline-block {
-    padding: 24px 16px 18px;
+    padding: 22px 14px 18px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .headline-meta-row {
@@ -62,16 +120,26 @@
     gap: 4px;
     margin-bottom: 12px;
     font-size: 0.65rem;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
+    width: 100%;
+    box-sizing: border-box;
   }
 
-  /* Scaled title so "REGISTER YOUR TEAM" fits comfortably inside the box */
+  /* Title scales responsively; letters of a single word NEVER wrap */
   .brutalist-title {
-    font-size: clamp(1.85rem, 8vw, 2.8rem) !important;
-    line-height: 1.05 !important;
+    font-size: clamp(1.45rem, 6.8vw, 2.5rem) !important;
+    line-height: 1.06 !important;
     letter-spacing: -0.02em !important;
-    word-break: break-word;
-    overflow-wrap: break-word;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .title-line {
+    display: block;
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+    hyphens: none !important;
   }
 
   .title-accent {
@@ -86,49 +154,238 @@
     font-size: 0.85rem;
     line-height: 1.5;
     margin: 10px 0 16px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
-  /* ── 4. Card Body Padding ──────────────────────────────── */
-  .brutalist-body {
-    padding: 0 14px 22px;
+  /* ── 4b. Brutalist Rule (Synopsis & Protocol Line Alignment) ─ */
+  .brutalist-rule {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    margin-top: 20px !important;
+    margin-bottom: 2px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
-  /* ── 5. Metric Info Grid (About Card) ─────────────────── */
+  .rule-line {
+    flex: 1 1 12px !important;
+    min-width: 8px !important;
+    height: 1.5px !important;
+    background: var(--bc-gold) !important;
+    opacity: 0.55 !important;
+    align-self: center !important;
+  }
+
+  .rule-node {
+    font-size: 0.55rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    color: var(--bc-gold) !important;
+    line-height: 1 !important;
+  }
+
+  .rule-tag {
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+    font-size: clamp(0.52rem, 2.4vw, 0.65rem) !important;
+    letter-spacing: 0.1em !important;
+    flex-shrink: 0 !important;
+    text-align: center !important;
+    line-height: 1 !important;
+  }
+
+  /* ── 5. Metric Info Grid (Venue, Date, Time & Team Size) ─ */
   .brutalist-info-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0 !important;
+    border-top: 1.5px solid rgba(245, 184, 0, 0.4) !important;
+    border-bottom: 1.5px solid rgba(245, 184, 0, 0.4) !important;
+    background: rgba(0, 0, 0, 0.35) !important;
+    margin-bottom: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .info-cell {
-    padding: 12px 10px;
+    padding: 14px 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Left column (01 Team Size & 03 Date): Prominent vertical divider line */
+  .info-cell:nth-child(1),
+  .info-cell:nth-child(3) {
+    border-right: 1.5px solid rgba(245, 184, 0, 0.45) !important;
+  }
+
+  /* Right column (02 Location & 04 Time): No right border */
+  .info-cell:nth-child(2),
+  .info-cell:nth-child(4),
+  .info-cell:nth-child(2n) {
+    border-right: none !important;
+  }
+
+  /* Top row (01 & 02): Prominent horizontal divider line */
+  .info-cell:nth-child(1),
+  .info-cell:nth-child(2) {
+    border-bottom: 1.5px solid rgba(245, 184, 0, 0.45) !important;
+  }
+
+  /* Bottom row (03 & 04): No bottom border (handled by container border-bottom) */
+  .info-cell:nth-child(3),
+  .info-cell:nth-child(4),
+  .info-cell:nth-child(n+3),
+  .info-cell:last-child {
+    border-bottom: none !important;
   }
 
   .info-value {
-    font-size: 1.25rem;
+    font-size: 1.22rem;
   }
 
-  /* ── 6. Fee Structure Grid (Registration Card) ────────── */
+  /* ── 6. Main Card Body & The Core Premise Box ──────────── */
+  .brutalist-body {
+    padding: 16px 14px 22px !important;
+    width: 100%;
+    box-sizing: border-box;
+    gap: 16px !important;
+  }
+
+  /* Core Premise Box: Perfectly symmetric 16px space from above and lower box */
+  .brutalist-lead-card {
+    padding: 18px 16px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .lead-tag {
+    margin-bottom: 8px !important;
+    font-size: 0.62rem !important;
+    letter-spacing: 0.14em !important;
+  }
+
+  .brutalist-lead-text {
+    font-size: 0.98rem !important;
+    line-height: 1.52 !important;
+  }
+
+  /* ── 7. Fee Structure Grid (Registration Card) ────────── */
   .brutalist-fee-grid {
+    display: grid !important;
     grid-template-columns: 1fr 1fr !important;
-    gap: 8px;
+    gap: 0 !important;
+    border-top: 1.5px solid rgba(245, 184, 0, 0.4) !important;
+    border-bottom: 1.5px solid rgba(245, 184, 0, 0.4) !important;
+    background: rgba(0, 0, 0, 0.35) !important;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .fee-cell {
-    padding: 12px 10px;
+    padding: 14px 12px !important;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Left column (01 Solo & 03 Trio): Prominent vertical divider line */
+  .fee-cell:nth-child(1),
+  .fee-cell:nth-child(3) {
+    border-right: 1.5px solid rgba(245, 184, 0, 0.45) !important;
+  }
+
+  /* Right column (02 Duo & 04 Squad): No right border */
+  .fee-cell:nth-child(2),
+  .fee-cell:nth-child(4),
+  .fee-cell:nth-child(2n) {
+    border-right: none !important;
+  }
+
+  /* Top row (01 & 02): Prominent horizontal divider line */
+  .fee-cell:nth-child(1),
+  .fee-cell:nth-child(2) {
+    border-bottom: 1.5px solid rgba(245, 184, 0, 0.45) !important;
+  }
+
+  /* Bottom row (03 & 04): No bottom border (handled by container border-bottom) */
+  .fee-cell:nth-child(3),
+  .fee-cell:nth-child(4),
+  .fee-cell:nth-child(n+3),
+  .fee-cell:last-child {
+    border-bottom: none !important;
   }
 
   .fee-price {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
   }
 
-  /* ── 7. TOPICS GRID & SEATS / STATUS WRAPPING ──────────── */
-  /* Single column on mobile so items have full width */
+  /* ── 8. Topics Section, Header Margins & Topics Grid ──── */
+  .topics-section {
+    margin-top: 22px !important;
+    margin-bottom: 14px !important;
+    gap: 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .topics-section-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: nowrap !important;
+    gap: 10px !important;
+    padding-bottom: 8px !important;
+    margin-bottom: 6px !important;
+    border-bottom: 1px dashed rgba(245, 184, 0, 0.25) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .topics-header-info {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 2px !important;
+    min-width: 0 !important;
+  }
+
+  .topics-tag {
+    font-size: clamp(0.62rem, 2.6vw, 0.7rem) !important;
+    letter-spacing: 0.12em !important;
+    white-space: nowrap !important;
+  }
+
+  .topics-tag-sub {
+    font-size: clamp(0.5rem, 2vw, 0.56rem) !important;
+    letter-spacing: 0.08em !important;
+    color: var(--bc-text-muted) !important;
+    white-space: nowrap !important;
+  }
+
+  .topics-counter {
+    font-size: 0.62rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.12em !important;
+    padding: 3px 8px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    align-self: center !important;
+  }
+
   .topics-grid {
     grid-template-columns: 1fr !important;
     gap: 8px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
-  /* Wrap items cleanly so badges never spill out of the card */
   .topic-item {
     display: flex;
     flex-wrap: wrap !important;
@@ -164,7 +421,6 @@
     line-height: 1.35;
   }
 
-  /* Badges wrap onto the next line on narrow phones */
   .topic-seats {
     order: 3;
     margin-left: auto;
@@ -182,10 +438,12 @@
     flex-shrink: 0;
   }
 
-  /* ── 8. Disclaimer & Register Button ──────────────────── */
+  /* ── 9. Disclaimer Box ─────────────────────────────────── */
   .brutalist-disclaimer-box {
     padding: 12px 14px;
     margin-top: 14px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .disclaimer-title {
@@ -197,28 +455,110 @@
     line-height: 1.45;
   }
 
+  /* ── 10. Footer Strip & Centered DSAC 2026 (All Cards) ─── */
+  .brutalist-footer-strip {
+    padding: 14px 16px !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    gap: 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .strip-brand {
+    font-size: 0.8rem !important;
+    letter-spacing: 0.22em !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .strip-cta {
+    width: 100% !important;
+    max-width: 320px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 12px 14px;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    margin: 0 auto !important;
+  }
+
+  /* Card 2: Main Google Forms CTA */
   .reg-cta-block {
+    width: 100% !important;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch !important;
     margin-top: 18px;
+    padding: 0;
   }
 
   .brutalist-cta-btn {
-    padding: 14px 14px;
-    font-size: 0.88rem;
-    letter-spacing: 0.08em;
+    width: 100% !important;
+    box-sizing: border-box;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 15px 12px !important;
+    font-size: clamp(0.76rem, 3.6vw, 0.9rem);
+    letter-spacing: 0.1em;
+    gap: 10px;
+    margin: 0;
   }
 
-  /* ── 9. Footer Strip ──────────────────────────────────── */
-  .brutalist-footer-strip {
-    padding: 12px 14px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+  /* ── 11. Team Leadership Grids (Single Column on Mobile) ─ */
+  .faculty-grid,
+  .student-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
-  .strip-tags {
-    flex-wrap: wrap;
-    gap: 8px;
+  .member-card {
+    padding: 16px 14px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .member-name {
+    font-size: 1rem;
+  }
+
+  .member-mail {
     font-size: 0.65rem;
+    padding: 6px 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Card 3: Instagram Banner */
+  .brutalist-instagram-box {
+    flex-direction: column;
+    align-items: stretch !important;
+    padding: 18px 14px;
+    gap: 14px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .brutalist-insta-btn {
+    width: 100% !important;
+    box-sizing: border-box;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 12px 14px;
   }
 
   .app-footer {
@@ -234,25 +574,127 @@
 
   .brand-logo {
     max-width: 92vw;
-    max-height: 230px;
+    max-height: 220px;
   }
 
   .page-section {
-    padding: 0 0.25rem;
+    padding: 0 5px !important;
+  }
+
+  .brutalist-headline-block {
+    padding: 18px 12px 14px !important;
   }
 
   .brutalist-title {
-    font-size: clamp(1.65rem, 8.2vw, 2.3rem) !important;
+    font-size: clamp(1.25rem, 6.2vw, 1.8rem) !important;
   }
 
-  .brutalist-info-grid,
   .brutalist-fee-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0 !important;
+    width: 100% !important;
+  }
+
+  .fee-cell {
+    padding: 12px 10px !important;
+  }
+
+  /* Left column (01 & 03): Explicit vertical divider */
+  .fee-cell:nth-child(1),
+  .fee-cell:nth-child(3) {
+    border-right: 1.5px solid rgba(245, 184, 0, 0.45) !important;
+  }
+
+  /* Right column (02 & 04): No right border */
+  .fee-cell:nth-child(2),
+  .fee-cell:nth-child(4),
+  .fee-cell:nth-child(2n) {
+    border-right: none !important;
+  }
+
+  /* Top row (01 & 02): Horizontal divider */
+  .fee-cell:nth-child(1),
+  .fee-cell:nth-child(2) {
+    border-bottom: 1.5px solid rgba(245, 184, 0, 0.45) !important;
+  }
+
+  /* Bottom row (03 & 04): No bottom border */
+  .fee-cell:nth-child(3),
+  .fee-cell:nth-child(4),
+  .fee-cell:nth-child(n+3),
+  .fee-cell:last-child {
+    border-bottom: none !important;
+  }
+
+  .brutalist-info-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0 !important;
+    width: 100% !important;
+    margin-bottom: 0 !important;
+  }
+
+  .info-cell {
+    padding: 12px 10px !important;
+  }
+
+  /* Left column (01 & 03): Explicit vertical divider */
+  .info-cell:nth-child(1),
+  .info-cell:nth-child(3) {
+    border-right: 1.5px solid rgba(245, 184, 0, 0.45) !important;
+  }
+
+  /* Right column (02 & 04): No right border */
+  .info-cell:nth-child(2),
+  .info-cell:nth-child(4),
+  .info-cell:nth-child(2n) {
+    border-right: none !important;
+  }
+
+  /* Top row (01 & 02): Horizontal divider */
+  .info-cell:nth-child(1),
+  .info-cell:nth-child(2) {
+    border-bottom: 1.5px solid rgba(245, 184, 0, 0.45) !important;
+  }
+
+  /* Bottom row (03 & 04): No bottom border */
+  .info-cell:nth-child(3),
+  .info-cell:nth-child(4),
+  .info-cell:nth-child(n+3),
+  .info-cell:last-child {
+    border-bottom: none !important;
   }
 
   .fee-price {
     font-size: 1.25rem;
+  }
+
+  .brutalist-body {
+    padding: 14px 12px 20px !important;
+    gap: 14px !important;
+  }
+
+  /* Core Premise Box: Perfectly symmetric 14px space from above and lower box */
+  .brutalist-lead-card {
+    padding: 16px 14px !important;
+    margin: 0 !important;
+  }
+
+  .brutalist-rule {
+    gap: 5px !important;
+    margin-top: 16px !important;
+  }
+
+  .rule-line {
+    flex: 1 1 8px !important;
+    min-width: 6px !important;
+  }
+
+  .rule-tag {
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+    font-size: 0.52rem !important;
+    letter-spacing: 0.08em !important;
   }
 
   .topic-item {
@@ -267,6 +709,11 @@
   .topic-status {
     font-size: 0.55rem;
     padding: 2px 6px;
+  }
+
+  .strip-brand {
+    font-size: 0.74rem !important;
+    letter-spacing: 0.18em !important;
   }
 }
 

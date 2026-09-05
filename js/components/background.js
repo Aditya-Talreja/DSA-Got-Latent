@@ -119,3 +119,44 @@ export function initSpotlights() {
     }, index * 400);
   });
 }
+
+/**
+ * Locks the stage background container height on mobile devices to prevent
+ * the background image from zooming, resizing, or jumping when the mobile
+ * browser address bar collapses/expands on scroll.
+ */
+export function lockMobileBackground() {
+  const bgContainer = $('.stage-bg-container');
+  if (!bgContainer) return;
+
+  function updateBgDimensions() {
+    const isMobile = window.innerWidth <= 768 || ('ontouchstart' in window);
+    if (!isMobile) {
+      bgContainer.style.height = '';
+      bgContainer.style.minHeight = '';
+      return;
+    }
+
+    const maxH = Math.max(
+      window.innerHeight,
+      window.screen?.height || 0,
+      window.visualViewport?.height || 0
+    );
+    bgContainer.style.height = `${maxH}px`;
+    bgContainer.style.minHeight = `${maxH}px`;
+  }
+
+  updateBgDimensions();
+
+  window.addEventListener('orientationchange', () => {
+    setTimeout(updateBgDimensions, 300);
+  });
+
+  let lastW = window.innerWidth;
+  window.addEventListener('resize', () => {
+    if (Math.abs(window.innerWidth - lastW) > 50) {
+      lastW = window.innerWidth;
+      updateBgDimensions();
+    }
+  });
+}

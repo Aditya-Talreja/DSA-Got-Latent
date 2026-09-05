@@ -155,6 +155,9 @@
 
 .title-line {
   display: block;
+  white-space: nowrap;
+  word-break: keep-all;
+  hyphens: none;
 }
 
 .title-accent {
@@ -181,18 +184,23 @@
 .brutalist-rule {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 14px;
   margin-top: 36px;
   font-family: 'Space Mono', monospace;
   font-size: 0.68rem;
   color: var(--bc-gold);
-  letter-spacing: 0.2em;
+  letter-spacing: 0.16em;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .rule-line {
-  flex: 1;
+  flex: 1 1 20px;
+  min-width: 15px;
   height: 2px;
   background: linear-gradient(90deg, var(--bc-gold) 0%, rgba(245, 184, 0, 0.2) 100%);
+  align-self: center;
 }
 
 .brutalist-rule .rule-line:last-child {
@@ -200,15 +208,23 @@
 }
 
 .rule-node {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: var(--bc-gold);
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .rule-tag {
   font-weight: 700;
   color: var(--bc-text-high);
   opacity: 0.85;
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-align: center;
+  line-height: 1;
 }
 
 /* ── Event Info Grid (4 Pillars) ────────────────────────── */
@@ -537,7 +553,7 @@
 .brutalist-footer-strip {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   background: linear-gradient(90deg, #E5A800 0%, #F5B800 50%, #E5A800 100%);
   color: #080808;
   padding: 14px 28px;
@@ -546,49 +562,34 @@
   z-index: 3;
 }
 
-.strip-tags {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+.strip-brand {
   font-family: 'Space Mono', monospace;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  color: #080808;
   text-transform: uppercase;
-}
-
-.strip-item {
-  color: #080808;
-  transition: transform 0.2s ease;
-}
-
-.strip-item:hover {
-  transform: translateY(-1px);
-}
-
-.strip-slash {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.65rem;
-  color: #080808;
-  opacity: 0.35;
-  font-weight: 700;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .strip-cta {
   font-family: 'Space Mono', monospace;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-decoration: none;
   background: #080808;
   color: var(--bc-gold);
-  padding: 8px 16px;
+  padding: 10px 24px;
   border: 2px solid #080808;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.4);
   transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  margin: 0 auto;
 }
 
 .strip-cta:hover {
@@ -773,8 +774,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed rgba(245, 184, 0, 0.25);
+}
+
+.topics-header-info {
+  display: flex;
+  align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px 12px;
 }
 
 .topics-tag {
@@ -789,15 +798,26 @@
   text-transform: uppercase;
 }
 
-.topics-counter {
+.topics-tag-sub {
   font-family: 'Space Mono', monospace;
   font-size: 0.62rem;
   font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--bc-text-muted);
+  text-transform: uppercase;
+}
+
+.topics-counter {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.64rem;
+  font-weight: 800;
   letter-spacing: 0.14em;
   color: #000000;
   background: var(--bc-gold);
   padding: 3px 8px;
   border-radius: 1px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .topics-grid {
@@ -1316,18 +1336,22 @@
   }
 
   .brutalist-info-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-bottom: 0;
   }
 
   .info-cell {
+    border-right: 1.5px solid rgba(245, 184, 0, 0.35);
+    border-bottom: 1.5px solid rgba(245, 184, 0, 0.35);
+    padding: 14px 14px;
+  }
+
+  .info-cell:nth-child(2n) {
     border-right: none;
-    padding: 18px 20px;
   }
 
-  .info-cell:nth-child(n+1) {
-    border-bottom: 1.5px solid rgba(245, 184, 0, 0.2);
-  }
-
+  .info-cell:nth-child(n+3),
   .info-cell:last-child {
     border-bottom: none;
   }
@@ -1361,6 +1385,11 @@
 
   .brutalist-fee-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .fee-cell {
+    border-right: 1.5px solid rgba(245, 184, 0, 0.35);
   }
 
   .fee-cell:nth-child(2n) {
@@ -1369,7 +1398,12 @@
 
   .fee-cell:nth-child(1),
   .fee-cell:nth-child(2) {
-    border-bottom: 1.5px solid rgba(245, 184, 0, 0.2);
+    border-bottom: 1.5px solid rgba(245, 184, 0, 0.35);
+  }
+
+  .fee-cell:nth-child(3),
+  .fee-cell:nth-child(4) {
+    border-bottom: none;
   }
 
   .topics-grid {
