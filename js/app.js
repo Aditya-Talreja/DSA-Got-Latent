@@ -4,11 +4,17 @@
 
 import { $ } from './utils/dom.js';
 import { createParticles, initSpotlights } from './components/background.js';
+import { initSeatTracker } from './components/seats.js';
+
+import { CONFIG } from './config.js';
 
 function init() {
   // Background visual effects (stage spotlights & floating fireflies)
   createParticles();
   initSpotlights();
+
+  // Live seat availability polling (fetches from Google Sheets via Apps Script)
+  initSeatTracker(CONFIG.APPS_SCRIPT_URL);
 
   // Global helper methods for smooth navigation
   window._app = {

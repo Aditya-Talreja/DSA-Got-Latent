@@ -20,6 +20,13 @@ yarn-error.log*
 .user_uploaded/
 .system_generated/
 
+# Environment Variables & Secrets
+.env
+.env.*
+!.env.example
+*.local
+config.local.js
+
 # Dependencies & Build Output
 node_modules/
 dist/
