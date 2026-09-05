@@ -11,6 +11,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  z-index: 5;
   padding: 2rem 1.5rem;
   margin-top: -2vh;
 }
@@ -20,9 +21,13 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  position: relative;
+  z-index: 10;
 }
 
 .brand-logo {
+  position: relative;
+  z-index: 10;
   max-width: clamp(340px, 64vw, 760px);
   max-height: 350px;
   width: 100%;
@@ -45,6 +50,7 @@
 /* Scroll Cue Base */
 .scroll-cue {
   position: absolute;
+  z-index: 10;
   bottom: 30px;
   left: 50%;
   transform: translateX(-50%);

@@ -4,7 +4,7 @@
    and fires the celebration confetti explosion.
    ======================================================== */
 
-import { fireCornerCannons, burstConfetti } from './confetti.js';
+import { fireCornerCannons, burstConfetti, burstBehindLogo } from './confetti.js';
 
 const STATUS_MESSAGES = [
   'INITIALIZING SYSTEM...',
@@ -91,16 +91,11 @@ export function initPreloader() {
 
     // Small hold at 100% for impact
     setTimeout(() => {
-      // 1. Fire victory stage cannons from bottom-left & bottom-right corners!
-      fireCornerCannons({ countPerSide: 65 });
+       // Explosion of confetti directly from BEHIND the center logo!
+       burstBehindLogo({ count: 48 });
 
-      // Second follow-up wave for rich layered stage effect
-      setTimeout(() => {
-        fireCornerCannons({ countPerSide: 35 });
-      }, 180);
-
-      // 2. Animate out the brutalist preloader curtain
-      loaderEl.classList.add('loaded');
+       // Animate out the brutalist preloader curtain
+       loaderEl.classList.add('loaded');
 
       // 3. Clean up DOM after transition
       setTimeout(() => {

@@ -6,7 +6,7 @@ import { $ } from './utils/dom.js';
 import { createParticles, initSpotlights } from './components/background.js';
 import { initSeatTracker } from './components/seats.js';
 import { initPreloader } from './components/loader.js';
-import { burstConfetti, fireCornerCannons } from './components/confetti.js';
+import { burstConfetti, fireCornerCannons, burstBehindLogo } from './components/confetti.js';
 import { CONFIG } from './config.js';
 
 // Launch Neo-Brutalist preloader immediately
@@ -24,15 +24,8 @@ function init() {
   const logo = $('.brand-logo');
   if (logo) {
     logo.style.cursor = 'pointer';
-    logo.addEventListener('click', (e) => {
-      const rect = logo.getBoundingClientRect();
-      burstConfetti({
-        count: 40,
-        origin: {
-          x: (rect.left + rect.width / 2) / window.innerWidth,
-          y: (rect.top + rect.height / 2) / window.innerHeight
-        }
-      });
+    logo.addEventListener('click', () => {
+      burstBehindLogo({ count: 40 });
     });
   }
 
@@ -54,6 +47,7 @@ function init() {
   window._app = {
     burstConfetti,
     fireCornerCannons,
+    burstBehindLogo,
     scrollToRegister() {
       const reg = $('#register');
       if (reg) reg.scrollIntoView({ behavior: 'smooth' });

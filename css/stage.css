@@ -57,21 +57,18 @@
 }
 
 #spotlight-1 {
-  width: 480px;
-  height: 480px;
-  transition: transform 5.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  width: 500px;
+  height: 500px;
 }
 
 #spotlight-2 {
   width: 580px;
   height: 580px;
-  transition: transform 7.5s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 #spotlight-3 {
-  width: 400px;
-  height: 400px;
-  transition: transform 6.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  width: 440px;
+  height: 440px;
 }
 
 /* ── Floating Gold Particles (Fireflies) ─────────────────── */

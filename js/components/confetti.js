@@ -1,8 +1,6 @@
 /* ========================================================
-   DSA Got Latent — Neo-Brutalist Confetti Engine
-   High-performance canvas particle system featuring
-   bottom-left & bottom-right corner stage cannons,
-   sharp geometric shapes, code glyphs, and bold backdrop shadows.
+   DSA Got Latent — Neo-Brutalist Confetti Engine (Ultra-Light Edition)
+   Hardware-accelerated, single-pass canvas poppers with zero CPU lag.
    ======================================================== */
 
 class BrutalistConfettiSystem {
@@ -11,8 +9,7 @@ class BrutalistConfettiSystem {
     this.ctx = null;
     this.particles = [];
     this.animationFrame = null;
-    this.colors = ['#FFE500', '#FFD23F', '#00F0FF', '#FF0055', '#00FF66', '#FFFFFF'];
-    this.symbols = ['{ }', '</>', '[ ]', '⚡', '★', '▲', '■', '++', '01', '&&'];
+    this.colors = ['#FFE500', '#FFD23F', '#00F0FF', '#FF0055', '#00FF66'];
     this.initCanvas();
   }
 
@@ -27,7 +24,7 @@ class BrutalistConfettiSystem {
       canvas.style.width = '100%';
       canvas.style.height = '100%';
       canvas.style.pointerEvents = 'none';
-      canvas.style.zIndex = '99999';
+      canvas.style.zIndex = '3'; // Behind the logo (z-index: 10), in front of stage bg (z-index: 0..2)
       document.body.appendChild(canvas);
     }
     this.canvas = canvas;
@@ -40,46 +37,43 @@ class BrutalistConfettiSystem {
     if (!this.canvas) return;
     this.width = window.innerWidth;
     this.height = window.innerHeight;
-    this.canvas.width = this.width * window.devicePixelRatio;
-    this.canvas.height = this.height * window.devicePixelRatio;
-    this.ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    // Cap pixel ratio to 1.5 to prevent massive 4K canvas redraw lag
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    this.canvas.width = this.width * dpr;
+    this.canvas.height = this.height * dpr;
+    this.ctx.scale(dpr, dpr);
   }
 
   /**
-   * Fire stage cannons from bottom-left and bottom-right corners!
-   * @param {Object} opts
+   * Fire a single crisp stage corner cannon wave from bottom-left & bottom-right
    */
   fireCornerCannons(opts = {}) {
     if (!this.canvas) this.initCanvas();
-    const countPerSide = opts.countPerSide || 55;
+    const countPerSide = opts.countPerSide || 22; // Feather-light particle count
 
-    // ── 1. BOTTOM-LEFT CORNER CANNON (shoots up & towards center-right) ──
+    // Bottom-Left Cannon
     for (let i = 0; i < countPerSide; i++) {
-      // Angle between ~ -25deg and -70deg (pointing up-right into the viewport)
-      const angle = -(Math.PI * 0.16 + Math.random() * (Math.PI * 0.28));
-      const speed = Math.random() * 26 + 18;
+      const angle = -(Math.PI * 0.18 + Math.random() * (Math.PI * 0.24));
+      const speed = Math.random() * 20 + 16;
       this.spawnParticle({
-        x: Math.random() * 30,
-        y: this.height - Math.random() * 20,
+        x: Math.random() * 20,
+        y: this.height,
         vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed * 1.25,
-        drag: 0.962,
-        gravity: 0.48 + Math.random() * 0.22
+        vy: Math.sin(angle) * speed * 1.2,
+        gravity: 0.55
       });
     }
 
-    // ── 2. BOTTOM-RIGHT CORNER CANNON (shoots up & towards center-left) ──
+    // Bottom-Right Cannon
     for (let i = 0; i < countPerSide; i++) {
-      // Angle between ~ -110deg and -155deg (pointing up-left into the viewport)
-      const angle = -(Math.PI * 0.56 + Math.random() * (Math.PI * 0.28));
-      const speed = Math.random() * 26 + 18;
+      const angle = -(Math.PI * 0.58 + Math.random() * (Math.PI * 0.24));
+      const speed = Math.random() * 20 + 16;
       this.spawnParticle({
-        x: this.width - Math.random() * 30,
-        y: this.height - Math.random() * 20,
+        x: this.width - Math.random() * 20,
+        y: this.height,
         vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed * 1.25,
-        drag: 0.962,
-        gravity: 0.48 + Math.random() * 0.22
+        vy: Math.sin(angle) * speed * 1.2,
+        gravity: 0.55
       });
     }
 
@@ -88,55 +82,41 @@ class BrutalistConfettiSystem {
     }
   }
 
-  /**
-   * Helper to spawn a single particle with randomized brutalist geometry.
-   */
   spawnParticle(customProps = {}) {
-    const typeRand = Math.random();
-    let type = 'rect';
-    if (typeRand < 0.38) type = 'square';
-    else if (typeRand < 0.72) type = 'rect';
-    else type = 'symbol';
-
+    const isSquare = Math.random() > 0.5;
     this.particles.push({
       x: customProps.x || this.width / 2,
       y: customProps.y || this.height / 2,
-      vx: customProps.vx || (Math.random() * 20 - 10),
-      vy: customProps.vy || -(Math.random() * 25 + 10),
-      gravity: customProps.gravity || (0.52 + Math.random() * 0.22),
-      drag: customProps.drag || 0.965,
+      vx: customProps.vx || (Math.random() * 16 - 8),
+      vy: customProps.vy || -(Math.random() * 20 + 10),
+      gravity: customProps.gravity || 0.55,
+      drag: 0.965,
       rotation: Math.random() * 360,
-      rotationSpeed: (Math.random() - 0.5) * 16,
+      rotationSpeed: (Math.random() - 0.5) * 12,
       color: this.colors[Math.floor(Math.random() * this.colors.length)],
-      size: Math.random() * 13 + 9,
-      width: Math.random() * 16 + 10,
-      height: Math.random() * 9 + 6,
-      type: type,
-      symbol: this.symbols[Math.floor(Math.random() * this.symbols.length)],
+      width: isSquare ? 10 : 16,
+      height: isSquare ? 10 : 7,
       opacity: 1,
-      fadeSpeed: Math.random() * 0.012 + 0.007,
+      fadeSpeed: Math.random() * 0.018 + 0.015, // Fast ~1.5s cleanup
       wobble: Math.random() * 10,
-      wobbleSpeed: Math.random() * 0.12 + 0.06
+      wobbleSpeed: 0.1
     });
   }
 
-  /**
-   * General burst from specific origin.
-   */
   burst(opts = {}) {
     if (!this.canvas) this.initCanvas();
-    const count = opts.count || 60;
+    const count = opts.count || 25;
     const originX = (opts.origin && opts.origin.x !== undefined) ? opts.origin.x * this.width : this.width / 2;
     const originY = (opts.origin && opts.origin.y !== undefined) ? opts.origin.y * this.height : this.height * 0.55;
 
     for (let i = 0; i < count; i++) {
-      const angle = (Math.random() * Math.PI) + Math.PI; // upward arc
-      const speed = Math.random() * 22 + 10;
+      const angle = (Math.random() * Math.PI) + Math.PI;
+      const speed = Math.random() * 18 + 8;
       this.spawnParticle({
-        x: originX + (Math.random() * 50 - 25),
-        y: originY + (Math.random() * 30 - 15),
-        vx: Math.cos(angle) * speed + (Math.random() * 6 - 3),
-        vy: Math.sin(angle) * speed * 1.3 - 4
+        x: originX,
+        y: originY,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed * 1.1
       });
     }
 
@@ -158,7 +138,7 @@ class BrutalistConfettiSystem {
       p.wobble += p.wobbleSpeed;
       p.opacity -= p.fadeSpeed;
 
-      if (p.opacity <= 0 || p.y > this.height + 60) {
+      if (p.opacity <= 0 || p.y > this.height + 40) {
         this.particles.splice(i, 1);
         continue;
       }
@@ -168,32 +148,13 @@ class BrutalistConfettiSystem {
       this.ctx.rotate((p.rotation * Math.PI) / 180);
       this.ctx.globalAlpha = Math.max(0, p.opacity);
 
-      if (p.type === 'square') {
-        // Neo-Brutalist stroked square
-        this.ctx.fillStyle = p.color;
-        this.ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
-        this.ctx.lineWidth = 1.5;
-        this.ctx.strokeStyle = '#000000';
-        this.ctx.strokeRect(-p.size / 2, -p.size / 2, p.size, p.size);
-      } else if (p.type === 'rect') {
-        // Neo-Brutalist ticket strip with 3D wobble
-        const wobbleWidth = p.width * Math.sin(p.wobble);
-        this.ctx.fillStyle = p.color;
-        this.ctx.fillRect(-wobbleWidth / 2, -p.height / 2, wobbleWidth, p.height);
-        this.ctx.lineWidth = 1;
-        this.ctx.strokeStyle = '#000000';
-        this.ctx.strokeRect(-wobbleWidth / 2, -p.height / 2, wobbleWidth, p.height);
-      } else if (p.type === 'symbol') {
-        // Monospace tech/code glyph with brutalist punch
-        this.ctx.font = `bold ${Math.round(p.size * 1.35)}px "Space Mono", monospace`;
-        this.ctx.fillStyle = p.color;
-        this.ctx.textAlign = 'center';
-        this.ctx.textBaseline = 'middle';
-        this.ctx.lineWidth = 2.5;
-        this.ctx.strokeStyle = '#000000';
-        this.ctx.strokeText(p.symbol, 0, 0);
-        this.ctx.fillText(p.symbol, 0, 0);
-      }
+      // Ultra-fast pure geometric rendering (no font metrics or text measurement)
+      const wobbleWidth = p.width * Math.sin(p.wobble);
+      this.ctx.fillStyle = p.color;
+      this.ctx.fillRect(-wobbleWidth / 2, -p.height / 2, wobbleWidth, p.height);
+      this.ctx.lineWidth = 1;
+      this.ctx.strokeStyle = '#000000';
+      this.ctx.strokeRect(-wobbleWidth / 2, -p.height / 2, wobbleWidth, p.height);
 
       this.ctx.restore();
     }
@@ -203,6 +164,41 @@ class BrutalistConfettiSystem {
     } else {
       this.animationFrame = null;
       this.ctx.clearRect(0, 0, this.width, this.height);
+    }
+  }
+
+  /**
+   * Fire an explosion of confetti directly from behind the center logo!
+   * @param {Object} opts
+   */
+  burstBehindLogo(opts = {}) {
+    if (!this.canvas) this.initCanvas();
+    const count = opts.count || 45;
+    const logo = document.querySelector('.brand-logo');
+    let originX = this.width / 2;
+    let originY = this.height * 0.44;
+
+    if (logo) {
+      const rect = logo.getBoundingClientRect();
+      originX = rect.left + rect.width / 2;
+      originY = rect.top + rect.height / 2;
+    }
+
+    for (let i = 0; i < count; i++) {
+      // 360-degree outward explosion around the logo
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 20 + 8;
+      this.spawnParticle({
+        x: originX + (Math.random() * 60 - 30),
+        y: originY + (Math.random() * 40 - 20),
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 3.5, // gentle upward bias
+        gravity: 0.45
+      });
+    }
+
+    if (!this.animationFrame) {
+      this.loop();
     }
   }
 }
@@ -222,4 +218,8 @@ export function burstConfetti(opts) {
 
 export function fireCornerCannons(opts) {
   getConfetti().fireCornerCannons(opts);
+}
+
+export function burstBehindLogo(opts) {
+  getConfetti().burstBehindLogo(opts);
 }
