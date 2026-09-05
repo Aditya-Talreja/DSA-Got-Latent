@@ -9,9 +9,9 @@ import { fireCornerCannons, burstConfetti, burstBehindLogo } from './confetti.js
 const STATUS_MESSAGES = [
   'INITIALIZING SYSTEM...',
   'ALLOCATING HEAP & MEMORY...',
+  'FETCHING STAGE CURTAINS & ASSETS...',
   'CALIBRATING SPOTLIGHT BEAMS...',
-  'CONNECTING TO LIVE LEADERBOARD...',
-  'FETCHING TOPIC INVENTORY...',
+  'DECODING HIGH-RES TEXTURES...',
   'PREPARING MAIN STAGE // READY!'
 ];
 
@@ -24,59 +24,80 @@ export function initPreloader() {
   const statusEl = document.getElementById('loader-status');
 
   let currentPct = 0;
-  let isPageLoaded = (document.readyState === 'complete');
   let isFinished = false;
+  let isStageAssetsReady = false;
 
-  // Track actual window load event
-  if (!isPageLoaded) {
-    window.addEventListener('load', () => {
-      isPageLoaded = true;
-    });
-  }
-
-  // Preload primary heavy assets
-  const preloadImg = (src) => {
+  // Strict asset preloader with full GPU decode validation
+  const preloadAndDecode = (src) => {
     return new Promise((resolve) => {
       const img = new Image();
-      img.onload = img.onerror = resolve;
       img.src = src;
+
+      const onLoaded = () => {
+        // img.decode() guarantees the image is fully parsed & ready in GPU memory
+        if ('decode' in img) {
+          img.decode().then(resolve).catch(resolve);
+        } else {
+          resolve();
+        }
+      };
+
+      if (img.complete) {
+        onLoaded();
+      } else {
+        img.onload = onLoaded;
+        img.onerror = resolve; // Fail-safe: don't permanently brick on error
+      }
     });
   };
 
-  Promise.all([
-    preloadImg('images/logo.webp'),
-    preloadImg('background/bg.webp')
+  // Wait for both the heavy background curtain and the illuminated brand logo
+  const stageAssetsPromise = Promise.all([
+    preloadAndDecode('background/bg.webp'),
+    preloadAndDecode('images/logo.webp')
   ]).then(() => {
-    isPageLoaded = true;
+    isStageAssetsReady = true;
   });
 
-  // Fast progress ticker (600ms - 900ms total experience)
+  // Generous safety cap (10s) only in case of complete network freeze, never rushing
+  const maxEmergencyTimeout = 10000;
   const startTime = performance.now();
-  const minDuration = 650; // Minimum time to showcase brutalist aesthetic
-  const maxTimeout = 1400; // Hard cap so user never waits
+  const minDisplayDuration = 600; // Minimum time to showcase brutalist aesthetic when cached
 
   const tick = () => {
     const elapsed = performance.now() - startTime;
-    const progressRatio = Math.min(1, elapsed / minDuration);
 
-    if (isPageLoaded || elapsed >= maxTimeout) {
-      currentPct = Math.min(100, Math.floor(currentPct + (100 - currentPct) * 0.35 + 3));
+    if (!isStageAssetsReady && elapsed < maxEmergencyTimeout) {
+      // ── PHASE 1: ASSETS STILL DOWNLOADING (First open) ──
+      // Smoothly progress up to 86%, then wait at 86-88% until bg.webp is 100% loaded & decoded
+      const loadingProgress = Math.min(86, Math.floor((elapsed / 1200) * 85));
+      if (currentPct < loadingProgress) {
+        currentPct++;
+      }
+      if (statusEl) {
+        statusEl.textContent = elapsed > 1200 
+          ? 'SYNCHRONIZING STAGE CURTAINS & LIGHTS...' 
+          : STATUS_MESSAGES[Math.min(3, Math.floor(elapsed / 400))];
+      }
     } else {
-      currentPct = Math.min(88, Math.floor(progressRatio * 85));
+      // ── PHASE 2: ASSETS FULLY DECODED (or cached on second visit) ──
+      // Rapidly and smoothly glide from currentPct all the way to 100%
+      const speed = isStageAssetsReady ? 0.35 : 0.2;
+      currentPct = Math.min(100, Math.floor(currentPct + (100 - currentPct) * speed + 3));
+
+      if (statusEl) {
+        if (currentPct >= 96) {
+          statusEl.textContent = STATUS_MESSAGES[5]; // PREPARING MAIN STAGE // READY!
+        } else {
+          statusEl.textContent = STATUS_MESSAGES[4]; // DECODING HIGH-RES TEXTURES...
+        }
+      }
     }
 
     if (pctEl) pctEl.textContent = `${currentPct}%`;
     if (barEl) barEl.style.width = `${currentPct}%`;
 
-    if (statusEl) {
-      const msgIdx = Math.min(
-        STATUS_MESSAGES.length - 1,
-        Math.floor((currentPct / 100) * STATUS_MESSAGES.length)
-      );
-      statusEl.textContent = STATUS_MESSAGES[msgIdx];
-    }
-
-    if (currentPct >= 100) {
+    if (currentPct >= 100 && (isStageAssetsReady || elapsed >= maxEmergencyTimeout)) {
       finishLoader();
     } else {
       requestAnimationFrame(tick);
@@ -89,15 +110,19 @@ export function initPreloader() {
     if (isFinished) return;
     isFinished = true;
 
+    // Flush DOM layout on spotlights so they are guaranteed locked before curtain lift
+    const spotlights = document.querySelectorAll('.spotlight-hole');
+    spotlights.forEach(el => void el.offsetHeight);
+
     // Small hold at 100% for impact
     setTimeout(() => {
-       // Explosion of confetti directly from BEHIND the center logo!
-       burstBehindLogo({ count: 48 });
+      // Celebration confetti explosion directly from behind the center logo
+      burstBehindLogo({ count: 48 });
 
-       // Animate out the brutalist preloader curtain
-       loaderEl.classList.add('loaded');
+      // Animate out the brutalist preloader curtain
+      loaderEl.classList.add('loaded');
 
-      // 3. Clean up DOM after transition
+      // Clean up DOM after transition finishes
       setTimeout(() => {
         loaderEl.style.display = 'none';
       }, 550);
