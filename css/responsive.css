@@ -1,0 +1,82 @@
+/* ========================================================
+   DSA Got Latent — Responsive Breakpoints & Print
+   Single-Page Portal Layout
+   ======================================================== */
+
+@media (max-width: 768px) {
+  :root {
+    --space-2xl: 32px;
+    --space-xl: 24px;
+  }
+
+  .hero-section {
+    min-height: 80svh;
+    padding: 1.5rem 1rem;
+    margin-top: 0;
+  }
+
+  .brand-logo {
+    max-width: 85vw;
+    max-height: 280px;
+  }
+
+  .page-section {
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  #team.page-section {
+    margin-bottom: 0 !important;
+  }
+
+  .app-footer {
+    padding: 18px 16px 24px;
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    min-height: 75svh;
+  }
+
+  .brand-logo {
+    max-width: 92vw;
+    max-height: 240px;
+  }
+
+  .page-section {
+    margin-bottom: 1rem;
+    padding: 0 0.75rem;
+  }
+
+  .app-footer {
+    padding: 16px 12px 20px;
+    font-size: 0.74rem;
+  }
+}
+
+/* ── Print Media ────────────────────────────────────────── */
+@media print {
+  .stage-bg-container,
+  .bg-layer,
+  .bg-overlay,
+  .particles,
+  .spotlight-mask-layer,
+  .scroll-cue,
+  .brutalist-cue {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff;
+    color: #111111;
+  }
+
+  .brutalist-card {
+    background: #ffffff !important;
+    border: 2px solid #000000 !important;
+    box-shadow: none !important;
+    color: #000000 !important;
+  }
+}

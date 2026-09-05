@@ -1,0 +1,122 @@
+/* ========================================================
+   DSA Got Latent — Design System: Variables & Reset
+   ======================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap');
+
+/* ── Reset ──────────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ── Custom Properties ──────────────────────────────────── */
+:root {
+  /* Background & Surface */
+  --bg-dark: #0a0000;
+  --bg-overlay: rgba(8, 0, 0, 0.55);
+  --bg-card: rgba(25, 5, 5, 0.72);
+  --bg-card-solid: rgba(18, 2, 2, 0.88);
+  --bg-input: rgba(0, 0, 0, 0.45);
+  --bg-input-focus: rgba(0, 0, 0, 0.65);
+
+  /* Glass */
+  --glass-border: rgba(255, 215, 0, 0.10);
+  --glass-border-hover: rgba(255, 215, 0, 0.22);
+  --glass-blur: 24px;
+
+  /* Gold Palette */
+  --gold: #FFD700;
+  --gold-light: #FFE44D;
+  --gold-mid: #E6C200;
+  --gold-dark: #D4AF37;
+  --gold-deep: #B8860B;
+
+  /* Red Palette */
+  --red-bright: #DC143C;
+  --red-primary: #B91C1C;
+  --red-dark: #7F1D1D;
+  --red-deep: #450a0a;
+
+  /* Text */
+  --text-primary: #FAF5EB;
+  --text-secondary: rgba(250, 245, 235, 0.7);
+  --text-muted: rgba(250, 245, 235, 0.38);
+
+  /* Status Colors */
+  --status-pending: #F59E0B;
+  --status-review: #60A5FA;
+  --status-approved: #34D399;
+  --status-rejected: #F87171;
+
+  /* Typography */
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  /* Borders */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 999px;
+
+  /* Shadows */
+  --shadow-card: 0 8px 40px rgba(0, 0, 0, 0.5), 0 0 80px rgba(139, 0, 0, 0.08);
+  --shadow-glow-gold: 0 0 25px rgba(255, 215, 0, 0.12), 0 0 60px rgba(255, 215, 0, 0.05);
+  --shadow-input: 0 2px 8px rgba(0, 0, 0, 0.35);
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 200ms;
+  --duration-normal: 350ms;
+  --duration-slow: 500ms;
+}
+
+/* ── Base ───────────────────────────────────────────────── */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: var(--bg-dark);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+#app {
+  position: relative;
+  z-index: 3;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg) 0;
+  position: relative;
+}

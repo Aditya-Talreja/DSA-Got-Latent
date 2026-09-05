@@ -1,0 +1,1362 @@
+/* ========================================================
+   DSA Got Latent — Neo-Brutalist Card — High-Aesthetics Edition
+   Theme: Obsidian Noir · Electric Warm Gold · Crisp Swiss Type
+   ======================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@700;800;900&display=swap');
+
+/* ── Custom Properties ──────────────────────────────────── */
+:root {
+  --bc-gold: #F5B800;
+  --bc-gold-bright: #FFD23F;
+  --bc-gold-glow: rgba(245, 184, 0, 0.4);
+  --bc-gold-dim: rgba(245, 184, 0, 0.12);
+  --bc-gold-border: rgba(245, 184, 0, 0.28);
+  --bc-bg-main: #0B0B0E;
+  --bc-bg-surface: #121216;
+  --bc-bg-surface-hover: #181820;
+  --bc-bg-gambit: #15120A;
+  --bc-text-high: #FAF7EE;
+  --bc-text-body: #D4D4DC;
+  --bc-text-muted: rgba(250, 247, 238, 0.55);
+  --bc-shadow-color: #000000;
+  --bc-shadow-rim: #F5B800;
+}
+
+/* ── Section Container ──────────────────────────────────── */
+#event-brutalist {
+  padding: 70px 24px 30px;
+  scroll-margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+}
+
+/* ── Card Container ─────────────────────────────────────── */
+.brutalist-card {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  background-color: var(--bc-bg-main);
+  border: 2px solid rgba(245, 184, 0, 0.35);
+  box-shadow:
+    12px 12px 0px var(--bc-shadow-color),
+    14px 14px 0px var(--bc-shadow-rim);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+              transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+              border-color 0.35s ease;
+}
+
+.brutalist-card:hover {
+  transform: translate(-3px, -3px);
+  border-color: rgba(245, 184, 0, 0.6);
+  box-shadow:
+    16px 16px 0px var(--bc-shadow-color),
+    18px 18px 0px var(--bc-shadow-rim);
+}
+
+/* Corner Bracket Accents */
+.brutalist-card::before,
+.brutalist-card::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.brutalist-card::before {
+  top: 6px;
+  left: 6px;
+  border-top: 2px solid var(--bc-gold);
+  border-left: 2px solid var(--bc-gold);
+}
+
+.brutalist-card::after {
+  bottom: 6px;
+  right: 6px;
+  border-bottom: 2px solid var(--bc-gold);
+  border-right: 2px solid var(--bc-gold);
+}
+
+/* ── Top Masthead Ribbon ────────────────────────────────── */
+.brutalist-ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #E5A800 0%, #F5B800 50%, #E5A800 100%);
+  color: #080808;
+  padding: 12px 28px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border-bottom: 2px solid #000000;
+  position: relative;
+  z-index: 3;
+}
+
+.ribbon-tag {
+  color: #000000;
+  font-weight: 700;
+}
+
+.ribbon-label {
+  color: #000000;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+/* ── Main Headline Block ────────────────────────────────── */
+.brutalist-headline-block {
+  padding: 48px 44px 32px;
+  position: relative;
+}
+
+.headline-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--bc-gold);
+  text-transform: uppercase;
+}
+
+.meta-stamp {
+  font-weight: 700;
+}
+
+.meta-coords {
+  color: var(--bc-text-muted);
+}
+
+.brutalist-title {
+  font-family: 'Syne', 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: clamp(3.2rem, 8vw, 5.4rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  color: var(--bc-text-high);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.title-line {
+  display: block;
+}
+
+.title-accent {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.accent-text {
+  color: var(--bc-gold);
+  text-shadow: 0 0 40px rgba(245, 184, 0, 0.25);
+  position: relative;
+}
+
+.accent-slashes {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.4em;
+  color: rgba(245, 184, 0, 0.5);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+/* Brutalist Rule */
+.brutalist-rule {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 36px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--bc-gold);
+  letter-spacing: 0.2em;
+}
+
+.rule-line {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, var(--bc-gold) 0%, rgba(245, 184, 0, 0.2) 100%);
+}
+
+.brutalist-rule .rule-line:last-child {
+  background: linear-gradient(90deg, rgba(245, 184, 0, 0.2) 0%, var(--bc-gold) 100%);
+}
+
+.rule-node {
+  font-size: 0.75rem;
+  color: var(--bc-gold);
+  line-height: 1;
+}
+
+.rule-tag {
+  font-weight: 700;
+  color: var(--bc-text-high);
+  opacity: 0.85;
+}
+
+/* ── Event Info Grid (4 Pillars) ────────────────────────── */
+.brutalist-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 2px solid rgba(245, 184, 0, 0.3);
+  border-bottom: 2px solid rgba(245, 184, 0, 0.3);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.info-cell {
+  padding: 24px 36px;
+  border-right: 1.5px solid rgba(245, 184, 0, 0.2);
+  border-bottom: 1.5px solid rgba(245, 184, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: background 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.info-cell:nth-child(2n) {
+  border-right: none;
+}
+
+.info-cell:nth-child(n+3) {
+  border-bottom: none;
+}
+
+.info-cell:hover {
+  background: rgba(245, 184, 0, 0.05);
+  border-color: rgba(245, 184, 0, 0.4);
+}
+
+/* Hover left indicator line */
+.info-cell::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: var(--bc-gold);
+  transition: width 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.info-cell:hover::before {
+  width: 4px;
+}
+
+.cell-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cell-idx {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--bc-gold);
+  background: rgba(245, 184, 0, 0.12);
+  padding: 2px 5px;
+  border: 1px solid rgba(245, 184, 0, 0.3);
+  border-radius: 1px;
+}
+
+.info-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--bc-gold);
+  text-transform: uppercase;
+}
+
+.info-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--bc-text-high);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  line-height: 1.25;
+  margin-top: 4px;
+}
+
+.val-sub {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--bc-gold);
+  opacity: 0.9;
+  letter-spacing: 0.05em;
+  vertical-align: middle;
+}
+
+.cell-hint {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: var(--bc-text-muted);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* ── Body Content Area ──────────────────────────────────── */
+.brutalist-body {
+  padding: 40px 44px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* 1. Lead Manifesto Card */
+.brutalist-lead-card {
+  background: var(--bc-bg-surface);
+  border: 1.5px solid rgba(245, 184, 0, 0.3);
+  border-left: 5px solid var(--bc-gold);
+  padding: 24px 28px;
+  position: relative;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.5);
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.brutalist-lead-card:hover {
+  background: var(--bc-bg-surface-hover);
+  border-color: rgba(245, 184, 0, 0.5);
+}
+
+.lead-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--bc-gold);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.tag-icon {
+  font-size: 0.8rem;
+  color: var(--bc-gold);
+}
+
+.brutalist-lead-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--bc-text-high);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+/* 2. Two-Column Protocol Grid */
+.brutalist-protocol-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.protocol-card {
+  background: var(--bc-bg-surface);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  transition: border-color 0.3s ease, transform 0.25s ease, background 0.3s ease;
+  position: relative;
+}
+
+.protocol-card:hover {
+  background: var(--bc-bg-surface-hover);
+  border-color: rgba(245, 184, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.protocol-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.protocol-badge {
+  align-self: flex-start;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #000000;
+  background: var(--bc-gold);
+  padding: 3px 8px;
+  border-radius: 1px;
+}
+
+.protocol-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--bc-text-high);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.protocol-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--bc-text-body);
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+/* Chips & Criteria */
+.protocol-chips,
+.protocol-criteria {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.chip {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--bc-gold);
+  background: rgba(245, 184, 0, 0.08);
+  border: 1px solid rgba(245, 184, 0, 0.25);
+  padding: 3px 8px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.chip:hover {
+  background: rgba(245, 184, 0, 0.18);
+  border-color: var(--bc-gold);
+}
+
+.crit-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--bc-text-high);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 3px 7px;
+  transition: all 0.2s ease;
+}
+
+.crit-tag:hover {
+  border-color: var(--bc-gold);
+  color: var(--bc-gold);
+}
+
+/* 3. The Latent Gambit Box */
+.brutalist-gambit-box {
+  background: var(--bc-bg-gambit);
+  border: 2px solid var(--bc-gold);
+  padding: 24px 28px;
+  position: relative;
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.7);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.brutalist-gambit-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.85);
+}
+
+.gambit-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.gambit-icon {
+  font-size: 1rem;
+  color: var(--bc-gold);
+  text-shadow: 0 0 10px rgba(245, 184, 0, 0.6);
+}
+
+.gambit-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--bc-gold);
+  text-transform: uppercase;
+  flex: 1;
+}
+
+.gambit-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #000000;
+  background: var(--bc-gold);
+  padding: 3px 8px;
+  border-radius: 1px;
+}
+
+.gambit-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.7;
+  color: var(--bc-text-high);
+  margin: 0;
+  letter-spacing: 0.015em;
+}
+
+/* ── Bottom Footer Strip ────────────────────────────────── */
+.brutalist-footer-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #E5A800 0%, #F5B800 50%, #E5A800 100%);
+  color: #080808;
+  padding: 14px 28px;
+  border-top: 2px solid #000000;
+  position: relative;
+  z-index: 3;
+}
+
+.strip-tags {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.strip-item {
+  color: #080808;
+  transition: transform 0.2s ease;
+}
+
+.strip-item:hover {
+  transform: translateY(-1px);
+}
+
+.strip-slash {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: #080808;
+  opacity: 0.35;
+  font-weight: 700;
+}
+
+.strip-cta {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-decoration: none;
+  background: #080808;
+  color: var(--bc-gold);
+  padding: 8px 16px;
+  border: 2px solid #080808;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.strip-cta:hover {
+  background: #FFFFFF;
+  color: #080808;
+  border-color: #080808;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.6);
+  transform: translate(-1px, -1px);
+}
+
+/* ── Hero Scroll Cue Brutalist Override ─────────────────── */
+.brutalist-cue {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  background: var(--bc-gold) !important;
+  color: #0a0a0a !important;
+  font-family: 'Space Mono', monospace !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  padding: 14px 28px !important;
+  border: 2px solid #000000 !important;
+  box-shadow:
+    6px 6px 0px #000000,
+    8px 8px 0px rgba(245, 184, 0, 0.5) !important;
+  border-radius: 0 !important;
+  transform: translateX(-50%) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
+  animation: none !important;
+  cursor: pointer;
+  margin-top: auto;
+  margin-bottom: 24px;
+}
+
+.brutalist-cue:hover {
+  transform: translateX(-50%) translateY(-3px) !important;
+  box-shadow:
+    8px 8px 0px #000000,
+    10px 10px 0px rgba(245, 184, 0, 0.7) !important;
+  background: #FFE066 !important;
+  color: #000000 !important;
+}
+
+.brutalist-cue:active {
+  transform: translateX(-50%) translateY(2px) !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+}
+
+.brutalist-cue .scroll-arrow {
+  font-size: 1.1rem !important;
+  line-height: 1 !important;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.brutalist-cue:hover .scroll-arrow {
+  transform: translateY(3px);
+}
+
+/* ── Registration Section & Subheading ──────────────────── */
+#register {
+  padding: 30px 24px 30px;
+  scroll-margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+}
+
+.brutalist-subheading {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--bc-text-body);
+  margin-top: 18px;
+  margin-bottom: 0;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+/* ── Fee Structure Grid (4 Tiers) ───────────────────────── */
+.brutalist-fee-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 2px solid rgba(245, 184, 0, 0.3);
+  border-bottom: 2px solid rgba(245, 184, 0, 0.3);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.fee-cell {
+  padding: 24px 20px;
+  border-right: 1.5px solid rgba(245, 184, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transition: background 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.fee-cell:last-child {
+  border-right: none;
+}
+
+.fee-cell:hover {
+  background: rgba(245, 184, 0, 0.06);
+  border-color: rgba(245, 184, 0, 0.4);
+}
+
+.fee-cell::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: var(--bc-gold);
+  transition: width 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.fee-cell:hover::before {
+  width: 4px;
+}
+
+.fee-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fee-idx {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--bc-gold);
+  background: rgba(245, 184, 0, 0.12);
+  padding: 2px 5px;
+  border: 1px solid rgba(245, 184, 0, 0.3);
+  border-radius: 1px;
+}
+
+.fee-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--bc-gold);
+  text-transform: uppercase;
+}
+
+.fee-price {
+  font-family: 'Syne', 'Space Grotesk', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--bc-gold);
+  line-height: 1.1;
+  margin-top: 4px;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 24px rgba(245, 184, 0, 0.2);
+}
+
+.fee-sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  color: var(--bc-text-muted);
+  text-transform: uppercase;
+}
+
+/* ── 10 Topics Section ──────────────────────────────────── */
+.topics-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.topics-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.topics-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--bc-gold);
+  text-transform: uppercase;
+}
+
+.topics-counter {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #000000;
+  background: var(--bc-gold);
+  padding: 3px 8px;
+  border-radius: 1px;
+}
+
+.topics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.topic-item {
+  background: var(--bc-bg-surface);
+  border: 1.5px solid rgba(245, 184, 0, 0.16);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: border-color 0.25s ease, transform 0.2s ease, background 0.25s ease;
+}
+
+.topic-item:hover {
+  border-color: var(--bc-gold);
+  background: var(--bc-bg-surface-hover);
+  transform: translateY(-2px);
+}
+
+.topic-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--bc-gold);
+  background: rgba(245, 184, 0, 0.1);
+  padding: 4px 7px;
+  border: 1px solid rgba(245, 184, 0, 0.3);
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+.topic-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.topic-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--bc-text-high);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.topic-desc {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--bc-text-muted);
+  letter-spacing: 0.05em;
+}
+
+.topic-status {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--bc-gold);
+  background: rgba(245, 184, 0, 0.08);
+  border: 1px solid rgba(245, 184, 0, 0.25);
+  padding: 3px 7px;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+/* ── Highlighted Disclaimer Box ─────────────────────────── */
+.brutalist-disclaimer-box {
+  background: var(--bc-bg-gambit);
+  border: 2px solid var(--bc-gold);
+  padding: 24px 28px;
+  position: relative;
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.7);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.brutalist-disclaimer-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.85);
+}
+
+.disclaimer-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.disclaimer-icon {
+  font-size: 0.85rem;
+  color: var(--bc-gold);
+  text-shadow: 0 0 8px rgba(245, 184, 0, 0.5);
+}
+
+.disclaimer-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--bc-gold);
+  text-transform: uppercase;
+  flex: 1;
+}
+
+.disclaimer-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #000000;
+  background: var(--bc-gold);
+  padding: 3px 8px;
+  border-radius: 1px;
+}
+
+.disclaimer-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--bc-text-high);
+  margin: 0;
+  letter-spacing: 0.015em;
+}
+
+/* ── Google Forms CTA Block ─────────────────────────────── */
+.reg-cta-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-top: 12px;
+}
+
+.brutalist-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: var(--bc-gold);
+  color: #080808;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 18px 40px;
+  border: 2px solid #000000;
+  box-shadow:
+    6px 6px 0px #000000,
+    8px 8px 0px rgba(245, 184, 0, 0.6);
+  border-radius: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+}
+
+.brutalist-cta-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow:
+    9px 9px 0px #000000,
+    11px 11px 0px rgba(245, 184, 0, 0.85);
+  background: #FFE066;
+  color: #000000;
+}
+
+.brutalist-cta-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #000000;
+}
+
+.brutalist-cta-btn .cta-arrow {
+  font-size: 1.25rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.brutalist-cta-btn:hover .cta-arrow {
+  transform: translate(2px, -2px);
+}
+
+.cta-subtext {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  color: var(--bc-text-muted);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* ── Team & Contact Section ─────────────────────────────── */
+#team {
+  padding: 30px 24px 10px;
+  scroll-margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+  margin-bottom: 0 !important;
+}
+
+.team-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.team-group-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--bc-gold);
+  text-transform: uppercase;
+}
+
+.team-cards-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.faculty-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.student-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.member-card {
+  background: var(--bc-bg-surface);
+  border: 1.5px solid rgba(245, 184, 0, 0.18);
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.25s ease, transform 0.2s ease, background 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.member-card:hover {
+  border-color: var(--bc-gold);
+  background: var(--bc-bg-surface-hover);
+  transform: translateY(-2px);
+}
+
+.member-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: var(--bc-gold);
+  transition: width 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.member-card:hover::before {
+  width: 4px;
+}
+
+.member-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.member-idx {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--bc-gold);
+  background: rgba(245, 184, 0, 0.1);
+  padding: 2px 5px;
+  border: 1px solid rgba(245, 184, 0, 0.3);
+  border-radius: 1px;
+}
+
+.member-role {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--bc-gold);
+  text-transform: uppercase;
+}
+
+.member-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--bc-text-high);
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+.member-mail {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--bc-text-muted);
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 7px 12px;
+  margin-top: 4px;
+  transition: all 0.2s ease;
+  word-break: break-all;
+}
+
+.member-mail:hover {
+  color: var(--bc-gold);
+  border-color: var(--bc-gold);
+  background: rgba(245, 184, 0, 0.08);
+}
+
+.mail-icon {
+  font-size: 0.85rem;
+  line-height: 1;
+  color: var(--bc-gold);
+}
+
+/* ── Instagram Social Banner ────────────────────────────── */
+.brutalist-instagram-box {
+  background: var(--bc-bg-surface);
+  border: 2px solid rgba(245, 184, 0, 0.3);
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.6);
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.brutalist-instagram-box:hover {
+  border-color: var(--bc-gold);
+  background: var(--bc-bg-surface-hover);
+}
+
+.instagram-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--bc-gold);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.instagram-handle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--bc-text-high);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.instagram-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  color: var(--bc-text-muted);
+  margin: 4px 0 0;
+}
+
+.brutalist-insta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bc-gold);
+  color: #080808;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 12px 24px;
+  border: 2px solid #000000;
+  box-shadow: 4px 4px 0px #000000;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.brutalist-insta-btn:hover {
+  background: #FFE066;
+  color: #000000;
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #000000;
+}
+
+/* ── Responsive Refinements ─────────────────────────────── */
+@media (max-width: 768px) {
+  #event-brutalist {
+    padding: 60px 16px 80px;
+  }
+
+  .brutalist-card {
+    box-shadow:
+      8px 8px 0px var(--bc-shadow-color),
+      10px 10px 0px var(--bc-shadow-rim);
+  }
+
+  .brutalist-card:hover {
+    box-shadow:
+      10px 10px 0px var(--bc-shadow-color),
+      12px 12px 0px var(--bc-shadow-rim);
+    transform: translate(-2px, -2px);
+  }
+
+  .brutalist-ribbon {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+    padding: 12px 18px;
+  }
+
+  .ribbon-divider {
+    display: none;
+  }
+
+  .brutalist-headline-block {
+    padding: 36px 20px 24px;
+  }
+
+  .brutalist-title {
+    font-size: 2.8rem;
+  }
+
+  .brutalist-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .info-cell {
+    border-right: none;
+    padding: 18px 20px;
+  }
+
+  .info-cell:nth-child(n+1) {
+    border-bottom: 1.5px solid rgba(245, 184, 0, 0.2);
+  }
+
+  .info-cell:last-child {
+    border-bottom: none;
+  }
+
+  .brutalist-body {
+    padding: 28px 20px 24px;
+    gap: 20px;
+  }
+
+  .brutalist-protocol-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .brutalist-footer-strip {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    padding: 16px 20px;
+  }
+
+  .strip-tags {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  /* Registration Card Responsive */
+  #register {
+    padding: 20px 16px 20px;
+  }
+
+  .brutalist-fee-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .fee-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .fee-cell:nth-child(1),
+  .fee-cell:nth-child(2) {
+    border-bottom: 1.5px solid rgba(245, 184, 0, 0.2);
+  }
+
+  .topics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .brutalist-cta-btn {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+  }
+
+  /* Team Card Responsive */
+  #team {
+    padding: 20px 16px 10px;
+    margin-bottom: 0 !important;
+  }
+
+  .faculty-grid,
+  .student-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .brutalist-instagram-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .brutalist-insta-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .brutalist-fee-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fee-cell {
+    border-right: none !important;
+    border-bottom: 1.5px solid rgba(245, 184, 0, 0.2) !important;
+  }
+
+  .fee-cell:last-child {
+    border-bottom: none !important;
+  }
+
+  .brutalist-title {
+    font-size: 2.2rem;
+  }
+
+  .headline-meta-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .brutalist-cue {
+    padding: 12px 20px !important;
+    font-size: 0.72rem !important;
+  }
+}

@@ -1,0 +1,119 @@
+/* ========================================================
+   DSA Got Latent — Stage: Background, Spotlights & Fireflies
+   ======================================================== */
+
+/* ── Stage Background & Spotlight Mask Container ──────────── */
+.stage-bg-container {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  isolation: isolate;
+  pointer-events: none;
+}
+
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  background: url('../background/bg.png') center center / cover no-repeat;
+  z-index: 0;
+  filter: brightness(1.15);
+}
+
+.bg-overlay {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 0%, rgba(5, 0, 0, 0.3) 75%, rgba(0, 0, 0, 0.7) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.5) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Dark stage mask overlay with spotlight cutout holes */
+.spotlight-mask-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background-color: rgba(6, 3, 3, 0.78); /* Dark stage atmosphere */
+  mix-blend-mode: multiply;
+  overflow: hidden;
+}
+
+.spotlight-hole {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+  background: radial-gradient(circle at center,
+    #ffffff 0%,
+    #ffffff 22%,
+    rgba(255, 255, 255, 0.92) 40%,
+    rgba(255, 255, 255, 0.55) 60%,
+    rgba(255, 255, 255, 0.18) 78%,
+    transparent 100%
+  );
+  filter: blur(8px);
+}
+
+#spotlight-1 {
+  width: 480px;
+  height: 480px;
+  transition: transform 5.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+#spotlight-2 {
+  width: 580px;
+  height: 580px;
+  transition: transform 7.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+#spotlight-3 {
+  width: 400px;
+  height: 400px;
+  transition: transform 6.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* ── Floating Gold Particles (Fireflies) ─────────────────── */
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: #ffd700;
+  opacity: 0.8;
+  animation: fireflyGlow ease-in-out infinite;
+  box-shadow: 0 0 4px 1.5px #ffd700,
+              0 0 10px 2.5px rgba(255, 215, 0, 0.45);
+  pointer-events: none;
+}
+
+/* Firefly: subtle, delicate pulse and drift */
+@keyframes fireflyGlow {
+  0%, 100% {
+    opacity: 0.55;
+    transform: translate3d(0, 0, 0) scale(0.85);
+    box-shadow: 0 0 3px 1px #ffd700, 0 0 7px 2px rgba(255, 215, 0, 0.35);
+  }
+  25% {
+    opacity: 0.85;
+    transform: translate3d(6px, -10px, 0) scale(1.15);
+    box-shadow: 0 0 5px 2px #ffd700, 0 0 12px 3px rgba(255, 215, 0, 0.5);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translate3d(-8px, -18px, 0) scale(0.8);
+    box-shadow: 0 0 3px 1px #ffd700, 0 0 6px 2px rgba(255, 215, 0, 0.3);
+  }
+  75% {
+    opacity: 0.8;
+    transform: translate3d(10px, -8px, 0) scale(1.1);
+    box-shadow: 0 0 4px 1.5px #ffd700, 0 0 10px 2.5px rgba(255, 215, 0, 0.45);
+  }
+}

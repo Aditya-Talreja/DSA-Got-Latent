@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DSA Got Latent — Team Registration</title>
+  <meta name="description" content="Register your team for DSA Got Latent. Showcase your talent, take the stage. Complete registration and payment to confirm your spot.">
+  <meta name="theme-color" content="#0a0000">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css?v=v20260904_static_portal">
+</head>
+<body>
+  <div id="app">
+
+    <!-- ── Static Stage Background (Curtains, Spotlights & Fireflies) ── -->
+    <div class="stage-bg-container" aria-hidden="true">
+      <div class="bg-layer"></div>
+      <div class="particles" id="particles"></div>
+      <div class="spotlight-mask-layer" id="spotlight-mask-layer">
+        <div class="spotlight-hole" id="spotlight-1"></div>
+        <div class="spotlight-hole" id="spotlight-2"></div>
+        <div class="spotlight-hole" id="spotlight-3"></div>
+      </div>
+      <div class="bg-overlay"></div>
+    </div>
+
+    <!-- ── Main Scrolling Content ────────────────────── -->
+    <main id="main-content">
+
+      <!-- ═══════════════ 1. HERO (LOGO ONLY) ═══════════════ -->
+      <section id="hero" class="hero-section" aria-label="DSA Got Latent">
+        <div class="hero-logo-container">
+          <img src="images/logo.png" alt="DSA Got Latent Logo" class="brand-logo">
+        </div>
+        <a href="#event-brutalist" class="scroll-cue brutalist-cue" aria-label="Scroll to learn more">
+          <span class="scroll-text">EXPLORE OUR EVENT</span>
+          <span class="scroll-arrow">↓</span>
+        </a>
+      </section>
+
+      <!-- ═══════════════ NEO-BRUTALIST EVENT CARD ═══════════════ -->
+      <section id="event-brutalist" class="page-section" aria-label="Event Highlight">
+        <div class="brutalist-card" id="brutalist-event-card">
+
+          <!-- Top Masthead Ribbon -->
+          <div class="brutalist-ribbon">
+            <span class="ribbon-tag">DSA Community [DSAC]</span>
+            <span class="ribbon-label">DSA'S GOT LATENT</span>
+          </div>
+
+          <!-- Main Headline Block -->
+          <div class="brutalist-headline-block">
+            <div class="headline-meta-row">
+              <span class="meta-stamp">[ THE SPOTLIGHT STAGE ]</span>
+              <span class="meta-coords">13.09.2026 // BLDG.AB1</span>
+            </div>
+
+            <h2 class="brutalist-title">
+              <span class="title-line">ABOUT</span>
+              <span class="title-line title-accent">
+                <span class="accent-text">OUR</span>
+                <span class="accent-slashes">//</span>
+              </span>
+              <span class="title-line">EVENT</span>
+            </h2>
+
+            <div class="brutalist-rule">
+              <span class="rule-line"></span>
+              <span class="rule-node">◆</span>
+              <span class="rule-tag">SYNOPSIS & PROTOCOL</span>
+              <span class="rule-node">◆</span>
+              <span class="rule-line"></span>
+            </div>
+          </div>
+
+          <!-- Event Info Grid (4 Metric Pillars) -->
+          <div class="brutalist-info-grid">
+            <div class="info-cell">
+              <div class="cell-head">
+                <span class="cell-idx">01</span>
+                <span class="info-label">TEAM SIZE</span>
+              </div>
+              <div class="info-value">1 – 4 <span class="val-sub">MEMBERS</span></div>
+              <span class="cell-hint">Solo Hustle or Squad</span>
+            </div>
+
+            <div class="info-cell">
+              <div class="cell-head">
+                <span class="cell-idx">02</span>
+                <span class="info-label">LOCATION</span>
+              </div>
+              <div class="info-value">AB1 MINI <span class="val-sub">AUDITORIUM</span></div>
+              <span class="cell-hint">Main Showcase Arena</span>
+            </div>
+
+            <div class="info-cell">
+              <div class="cell-head">
+                <span class="cell-idx">03</span>
+                <span class="info-label">DATE</span>
+              </div>
+              <div class="info-value">13 SEPT 2026</div>
+              <span class="cell-hint">Sunday Session</span>
+            </div>
+
+            <div class="info-cell">
+              <div class="cell-head">
+                <span class="cell-idx">04</span>
+                <span class="info-label">TIME</span>
+              </div>
+              <div class="info-value">2:00 PM – 5:00 PM</div>
+              <span class="cell-hint">3-Hour Live Showdown</span>
+            </div>
+          </div>
+
+          <!-- Body Content Area -->
+          <div class="brutalist-body">
+
+            <!-- Lead Manifesto -->
+            <div class="brutalist-lead-card">
+              <div class="lead-tag">
+                <span class="tag-icon">◆</span>
+                <span>THE CORE PREMISE</span>
+              </div>
+              <p class="brutalist-lead-text">
+                DSA's Got Latent is a teaching and creative visualization challenge that takes DSA beyond conventional coding and problem-solving.
+              </p>
+            </div>
+
+            <!-- Two-Column Protocol Grid -->
+            <div class="brutalist-protocol-grid">
+
+              <!-- Phase 01: Sprint Prep Block -->
+              <div class="protocol-card">
+                <div class="protocol-header">
+                  <span class="protocol-badge">PHASE 01</span>
+                  <span class="protocol-title">1-WEEK VISUAL SPRINT</span>
+                </div>
+                <p class="protocol-text">
+                  Participants will choose a DSA topic and get approximately one week to understand it, explore its applications, and create a creative visual representation using posters, models, diagrams, demonstrations, analogies, or any other medium.
+                </p>
+                <div class="protocol-chips">
+                  <span class="chip">POSTERS</span>
+                  <span class="chip">MODELS</span>
+                  <span class="chip">DIAGRAMS</span>
+                  <span class="chip">DEMOS</span>
+                  <span class="chip">ANALOGIES</span>
+                </div>
+              </div>
+
+              <!-- Phase 02: Live Stage Defense Block -->
+              <div class="protocol-card">
+                <div class="protocol-header">
+                  <span class="protocol-badge">PHASE 02</span>
+                  <span class="protocol-title">LIVE STAGE DEFENSE</span>
+                </div>
+                <p class="protocol-text">
+                  During the event, participants must teach their topic completely from scratch, making it understandable even to someone with no prior knowledge. They will be evaluated on their conceptual clarity, teaching ability, creativity, visual representation, and communication.
+                </p>
+                <div class="protocol-criteria">
+                  <span class="crit-tag">CLARITY</span>
+                  <span class="crit-tag">TEACHING</span>
+                  <span class="crit-tag">CREATIVITY</span>
+                  <span class="crit-tag">VISUALS</span>
+                  <span class="crit-tag">COMMUNICATION</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Standout Gambit / Prediction Callout -->
+            <div class="brutalist-gambit-box">
+              <div class="gambit-header">
+                <span class="gambit-icon">◆</span>
+                <span class="gambit-title">THE LATENT GAMBIT // SELF-PREDICTION RULE</span>
+                <span class="gambit-badge">WINNER TAKE ALL</span>
+              </div>
+              <p class="gambit-text">
+                To make things even more interesting, participants will also predict their own final score before the judges reveal it. If the predicted score matches the final judges' score, the team wins the challenge!
+              </p>
+            </div>
+
+          </div>
+
+          <!-- Bottom Footer Strip -->
+          <div class="brutalist-footer-strip">
+            <div class="strip-tags">
+              <span class="strip-item">↗ LEARN</span>
+              <span class="strip-slash">//</span>
+              <span class="strip-item">↗ BUILD</span>
+              <span class="strip-slash">//</span>
+              <span class="strip-item">↗ TEACH</span>
+              <span class="strip-slash">//</span>
+              <span class="strip-item">↗ PREDICT</span>
+            </div>
+            <a href="#register" class="strip-cta">REGISTER TEAM ↓</a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ═══════════════ BRUTALIST REGISTRATION CARD ═══════════════ -->
+      <section id="register" class="page-section" aria-label="Event Registration">
+        <div class="brutalist-card brutalist-reg-card" id="brutalist-registration-card">
+
+          <!-- Top Masthead Ribbon -->
+          <div class="brutalist-ribbon">
+            <span class="ribbon-tag">DSA Community [DSAC]</span>
+            <span class="ribbon-label">DSA'S GOT LATENT</span>
+          </div>
+
+          <!-- Main Headline Block -->
+          <div class="brutalist-headline-block">
+            <div class="headline-meta-row">
+              <span class="meta-stamp">[ REGISTRATION PORTAL ]</span>
+              <span class="meta-coords">LIMITED CAPACITY // ENTRY PROTOCOL</span>
+            </div>
+
+            <h2 class="brutalist-title">
+              <span class="title-line">REGISTER</span>
+              <span class="title-line title-accent">
+                <span class="accent-text">YOUR</span>
+                <span class="accent-slashes">//</span>
+              </span>
+              <span class="title-line">TEAM</span>
+            </h2>
+
+            <p class="brutalist-subheading">
+              Compete solo or assemble a team of up to 4 innovators.
+            </p>
+
+            <div class="brutalist-rule">
+              <span class="rule-line"></span>
+              <span class="rule-node">◆</span>
+              <span class="rule-tag">FEE STRUCTURE & TOPIC SELECTION</span>
+              <span class="rule-node">◆</span>
+              <span class="rule-line"></span>
+            </div>
+          </div>
+
+          <!-- Fee Structure Grid (4 Tiers) -->
+          <div class="brutalist-fee-grid">
+            <div class="fee-cell">
+              <div class="fee-head">
+                <span class="fee-idx">01</span>
+                <span class="fee-label">SOLO</span>
+              </div>
+              <div class="fee-price">₹29</div>
+              <span class="fee-sub">1 Contender</span>
+            </div>
+
+            <div class="fee-cell">
+              <div class="fee-head">
+                <span class="fee-idx">02</span>
+                <span class="fee-label">DUO</span>
+              </div>
+              <div class="fee-price">₹49</div>
+              <span class="fee-sub">2 Innovators</span>
+            </div>
+
+            <div class="fee-cell">
+              <div class="fee-head">
+                <span class="fee-idx">03</span>
+                <span class="fee-label">TRIO</span>
+              </div>
+              <div class="fee-price">₹69</div>
+              <span class="fee-sub">3 Innovators</span>
+            </div>
+
+            <div class="fee-cell">
+              <div class="fee-head">
+                <span class="fee-idx">04</span>
+                <span class="fee-label">SQUAD</span>
+              </div>
+              <div class="fee-price">₹89</div>
+              <span class="fee-sub">4 Innovators</span>
+            </div>
+          </div>
+
+          <!-- Registration Card Body -->
+          <div class="brutalist-body">
+
+            <!-- 10 Topics Section -->
+            <div class="topics-section">
+              <div class="topics-section-header">
+                <div class="topics-tag">
+                  <span class="tag-icon">◆</span>
+                  <span>SELECT YOUR TOPIC // 10 CURATED CHALLENGE TRACKS</span>
+                </div>
+                <span class="topics-counter">10 SLOTS</span>
+              </div>
+
+              <div class="topics-grid">
+                <div class="topic-item">
+                  <span class="topic-num">01</span>
+                  <div class="topic-content">
+                    <span class="topic-title">Topic 01</span>
+                    <span class="topic-desc">[To be decided]</span>
+                  </div>
+                  <span class="topic-status">AVAILABLE</span>
+                </div>
+
+                <div class="topic-item">
+                  <span class="topic-num">02</span>
+                  <div class="topic-content">
+                    <span class="topic-title">Topic 02</span>
+                    <span class="topic-desc">[To be decided]</span>
+                  </div>
+                  <span class="topic-status">AVAILABLE</span>
+                </div>
+
+                <div class="topic-item">
+                  <span class="topic-num">03</span>
+                  <div class="topic-content">
+                    <span class="topic-title">Topic 03</span>
+                    <span class="topic-desc">[To be decided]</span>
+                  </div>
+                  <span class="topic-status">AVAILABLE</span>
+                </div>
+
+                <div class="topic-item">
+                  <span class="topic-num">04</span>
+                  <div class="topic-content">
+                    <span class="topic-title">Topic 04</span>
+                    <span class="topic-desc">[To be decided]</span>
+                  </div>
+                  <span class="topic-status">AVAILABLE</span>
+                </div>
+
+                <div class="topic-item">
+                  <span class="topic-num">05</span>
+                  <div class="topic-content">
+                    <span class="topic-title">Topic 05</span>
+                    <span class="topic-desc">[To be decided]</span>
+                  </div>
+                  <span class="topic-status">AVAILABLE</span>
+                </div>
+
+                <div class="topic-item">
+                  <span class="topic-num">06</span>
+                  <div class="topic-content">
+                    <span class="topic-title">Topic 06</span>
+                    <span class="topic-desc">[To be decided]</span>
+                  </div>
+                  <span class="topic-status">AVAILABLE</span>
+                </div>
+
+                <div class="topic-item">
+                  <span class="topic-num">07</span>
+                  <div class="topic-content">
+                    <span class="topic-title">Topic 07</span>
+                    <span class="topic-desc">[To be decided]</span>
+                  </div>
+                  <span class="topic-status">AVAILABLE</span>
+                </div>
+
+                <div class="topic-item">
+                  <span class="topic-num">08</span>
+                  <div class="topic-content">
+                    <span class="topic-title">Topic 08</span>
+                    <span class="topic-desc">[To be decided]</span>
+                  </div>
+                  <span class="topic-status">AVAILABLE</span>
+                </div>
+
+                <div class="topic-item">
+                  <span class="topic-num">09</span>
+                  <div class="topic-content">
+                    <span class="topic-title">Topic 09</span>
+                    <span class="topic-desc">[To be decided]</span>
+                  </div>
+                  <span class="topic-status">AVAILABLE</span>
+                </div>
+
+                <div class="topic-item">
+                  <span class="topic-num">10</span>
+                  <div class="topic-content">
+                    <span class="topic-title">Topic 10</span>
+                    <span class="topic-desc">[To be decided]</span>
+                  </div>
+                  <span class="topic-status">AVAILABLE</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Highlighted Disclaimer Box -->
+            <div class="brutalist-disclaimer-box">
+              <div class="disclaimer-header">
+                <span class="disclaimer-icon">◆</span>
+                <span class="disclaimer-title">IMPORTANT DISCLAIMER // ALLOCATION POLICY</span>
+                <span class="disclaimer-badge">LIMITED SLOTS</span>
+              </div>
+              <p class="disclaimer-text">
+                Teams per topics are limited, register fast to avail your preferred topic.
+              </p>
+            </div>
+
+            <!-- Final Register Button (Google Forms) -->
+            <div class="reg-cta-block">
+              <a href="https://forms.google.com" target="_blank" rel="noopener noreferrer" class="brutalist-cta-btn" id="btn-google-form">
+                <span>REGISTER VIA GOOGLE FORMS</span>
+                <span class="cta-arrow">↗</span>
+              </a>
+            </div>
+
+          </div>
+
+          <!-- Bottom Footer Strip -->
+          <div class="brutalist-footer-strip">
+            <div class="strip-tags">
+              <span class="strip-item">↗ PICK SQUAD</span>
+              <span class="strip-slash">//</span>
+              <span class="strip-item">↗ LOCK TOPIC</span>
+              <span class="strip-slash">//</span>
+              <span class="strip-item">↗ FILL FORM</span>
+              <span class="strip-slash">//</span>
+              <span class="strip-item">↗ TAKE THE STAGE</span>
+            </div>
+            <span class="strip-item">DSAC // 2026</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ═══════════════ BRUTALIST TEAM & CONTACT CARD ═══════════════ -->
+      <section id="team" class="page-section" aria-label="Team and Contact Information">
+        <div class="brutalist-card brutalist-team-card" id="brutalist-team-card">
+
+          <!-- Top Masthead Ribbon -->
+          <div class="brutalist-ribbon">
+            <span class="ribbon-tag">DSA Community [DSAC]</span>
+            <span class="ribbon-label">DSA'S GOT LATENT</span>
+          </div>
+
+          <!-- Main Headline Block -->
+          <div class="brutalist-headline-block">
+            <div class="headline-meta-row">
+              <span class="meta-stamp">[ LEADERSHIP DIRECTORY ]</span>
+              <span class="meta-coords">CAMPUS CHAPTER // GET IN TOUCH</span>
+            </div>
+
+            <h2 class="brutalist-title">
+              <span class="title-line">KNOW</span>
+              <span class="title-line title-accent">
+                <span class="accent-text">OUR</span>
+                <span class="accent-slashes">//</span>
+              </span>
+              <span class="title-line">TEAM</span>
+            </h2>
+
+            <p class="brutalist-subheading">
+              The minds behind DSA's Got Latent. Feel free to reach out to us for any queries!
+            </p>
+
+            <div class="brutalist-rule">
+              <span class="rule-line"></span>
+              <span class="rule-node">◆</span>
+              <span class="rule-tag">FACULTY & STUDENT COORDINATION</span>
+              <span class="rule-node">◆</span>
+              <span class="rule-line"></span>
+            </div>
+          </div>
+
+          <!-- Team Leadership Grid -->
+          <div class="brutalist-body">
+
+            <!-- Faculty Section -->
+            <div class="team-group">
+              <div class="team-group-header">
+                <span class="tag-icon">◆</span>
+                <span class="group-title">FACULTY LEADERSHIP</span>
+              </div>
+              <div class="team-cards-grid faculty-grid">
+
+                <!-- Faculty Coordinator -->
+                <div class="member-card">
+                  <div class="member-header">
+                    <span class="member-idx">01</span>
+                    <span class="member-role">FACULTY COORDINATOR</span>
+                  </div>
+                  <h3 class="member-name">[Faculty Coordinator Name]</h3>
+                  <a href="mailto:faculty.coordinator@college.edu" class="member-mail" aria-label="Email Faculty Coordinator">
+                    <span class="mail-icon">↗</span>
+                    <span class="mail-text">faculty.coordinator@college.edu</span>
+                  </a>
+                </div>
+
+                <!-- Faculty Co-Coordinator -->
+                <div class="member-card">
+                  <div class="member-header">
+                    <span class="member-idx">02</span>
+                    <span class="member-role">FACULTY CO-COORDINATOR</span>
+                  </div>
+                  <h3 class="member-name">[Faculty Co-Coordinator Name]</h3>
+                  <a href="mailto:faculty.cocoordinator@college.edu" class="member-mail" aria-label="Email Faculty Co-Coordinator">
+                    <span class="mail-icon">↗</span>
+                    <span class="mail-text">faculty.cocoordinator@college.edu</span>
+                  </a>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Student Core Leadership Section -->
+            <div class="team-group">
+              <div class="team-group-header">
+                <span class="tag-icon">◆</span>
+                <span class="group-title">STUDENT CORE TEAM</span>
+              </div>
+              <div class="team-cards-grid student-grid">
+
+                <!-- Community President -->
+                <div class="member-card">
+                  <div class="member-header">
+                    <span class="member-idx">03</span>
+                    <span class="member-role">COMMUNITY PRESIDENT</span>
+                  </div>
+                  <h3 class="member-name">Sejal Mishra</h3>
+                  <a href="mailto:sejal.24bce11199@vitbhopal.ac.in" class="member-mail" aria-label="Email Community President">
+                    <span class="mail-icon">↗</span>
+                    <span class="mail-text">sejal.24bce11199<br>@vitbhopal.ac.in</span>
+                  </a>
+                </div>
+
+                <!-- General Secretary -->
+                <div class="member-card">
+                  <div class="member-header">
+                    <span class="member-idx">04</span>
+                    <span class="member-role">GENERAL SECRETARY</span>
+                  </div>
+                  <h3 class="member-name">Akshat Singh</h3>
+                  <a href="mailto:akshat.24bce10004@vitbhopal.ac.in" class="member-mail" aria-label="Email General Secretary">
+                    <span class="mail-icon">↗</span>
+                    <span class="mail-text">akshat.24bce10004<br>@vitbhopal.ac.in</span>
+                  </a>
+                </div>
+
+                <!-- Coordinator -->
+                <div class="member-card">
+                  <div class="member-header">
+                    <span class="member-idx">05</span>
+                    <span class="member-role">COORDINATOR</span>
+                  </div>
+                  <h3 class="member-name">Divyansh Varshney</h3>
+                  <a href="mailto:divyansh.24bce11063@vitbhopal.ac.in" class="member-mail" aria-label="Email Coordinator">
+                    <span class="mail-icon">↗</span>
+                    <span class="mail-text">divyansh.24bce11063<br>@vitbhopal.ac.in</span>
+                  </a>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Instagram Connect Banner -->
+            <div class="brutalist-instagram-box">
+              <div class="instagram-left">
+                <span class="instagram-tag">◆ SOCIAL CHANNEL</span>
+                <h4 class="instagram-handle">@dsac.vit</h4>
+                <p class="instagram-desc">Follow our official Instagram for live updates, highlights & announcements</p>
+              </div>
+              <a href="https://www.instagram.com/dsac.vit?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="brutalist-insta-btn">
+                <span>OUR INSTAGRAM</span>
+                <span class="cta-arrow">↗</span>
+              </a>
+            </div>
+
+            <!-- Standout Queries Box -->
+            <div class="brutalist-disclaimer-box queries-box">
+              <div class="disclaimer-header">
+                <span class="disclaimer-icon">◆</span>
+                <span class="disclaimer-title">HAVE QUESTIONS OR NEED ASSISTANCE?</span>
+                <span class="disclaimer-badge">OPEN 24/7</span>
+              </div>
+              <p class="disclaimer-text">
+                Feel free to reach out to us for any queries! Whether you have questions regarding registration, topic selection, rules, or the schedule, our coordinators are always available to help.
+              </p>
+            </div>
+
+          </div>
+
+          <!-- Bottom Footer Strip -->
+          <div class="brutalist-footer-strip">
+            <div class="strip-tags">
+              <span class="strip-item">↗ CONNECT</span>
+              <span class="strip-slash">//</span>
+              <span class="strip-item">↗ COLLABORATE</span>
+              <span class="strip-slash">//</span>
+              <span class="strip-item">↗ LEARN TOGETHER</span>
+            </div>
+            <span class="strip-item">DSAC // 2026</span>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>© 2026 DSA Got Latent • Learn. Build. Teach.</p>
+    </footer>
+  </div>
+
+  <!-- App Logic (Modular Components) -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
