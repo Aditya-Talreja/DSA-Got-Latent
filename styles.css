@@ -4,6 +4,7 @@
    ======================================================== */
 
 @import url('./css/variables.css');
+@import url('./css/loader.css');
 @import url('./css/stage.css');
 @import url('./css/views.css');
 @import url('./css/brutalist.css');

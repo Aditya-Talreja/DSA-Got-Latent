@@ -1,0 +1,207 @@
+/* ========================================================
+   DSA Got Latent — Neo-Brutalist Preloader Styles
+   High-contrast, kinetic terminal aesthetic with hard shadows.
+   ======================================================== */
+
+.brutalist-loader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background-color: #07070A;
+  background-image: 
+    radial-gradient(rgba(245, 184, 0, 0.08) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(10,10,14,0.95) 100%);
+  background-size: 24px 24px, 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  transition: transform 0.5s cubic-bezier(0.8, 0, 0.15, 1), opacity 0.4s ease;
+  will-change: transform, opacity;
+  user-select: none;
+}
+
+.brutalist-loader.loaded {
+  transform: translateY(-102%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Central Brutalist Frame ────────────────────────────── */
+.loader-box {
+  width: 100%;
+  max-width: 540px;
+  background-color: #0F0F14;
+  border: 3px solid #F5B800;
+  box-shadow: 
+    10px 10px 0px #000000,
+    12px 12px 0px #F5B800;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Masthead Ribbon ────────────────────────────────────── */
+.loader-top-bar {
+  background-color: #F5B800;
+  color: #000000;
+  padding: 8px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid #000000;
+}
+
+.loader-sys-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.loader-pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #00FF66;
+  border-radius: 50%;
+  border: 1.5px solid #000;
+  animation: loaderPulse 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes loaderPulse {
+  0% { transform: scale(0.85); opacity: 0.6; }
+  100% { transform: scale(1.25); opacity: 1; filter: drop-shadow(0 0 4px #00FF66); }
+}
+
+.loader-ready-tag {
+  background-color: #000000;
+  color: #F5B800;
+  padding: 2px 7px;
+  font-size: 0.72rem;
+  border: 1px solid #F5B800;
+}
+
+/* ── Body Container ─────────────────────────────────────── */
+.loader-body {
+  padding: 2rem 1.6rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.loader-logo-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.loader-badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #F5B800;
+  background: rgba(245, 184, 0, 0.12);
+  border: 1px dashed rgba(245, 184, 0, 0.4);
+  padding: 3px 8px;
+  letter-spacing: 0.1em;
+}
+
+.loader-title {
+  margin: 0;
+  font-family: 'Syne', 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  line-height: 1.05;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+  text-shadow: 2px 2px 0px #F5B800;
+}
+
+/* ── Progress Section ───────────────────────────────────── */
+.loader-progress-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.loader-pct-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: 'Space Mono', monospace;
+}
+
+.loader-status-text {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.loader-pct {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #F5B800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+}
+
+/* ── Progress Bar ───────────────────────────────────────── */
+.loader-bar-outer {
+  width: 100%;
+  height: 20px;
+  background-color: #060608;
+  border: 2px solid #F5B800;
+  box-shadow: 3px 3px 0px #000000;
+  overflow: hidden;
+  padding: 2px;
+}
+
+.loader-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: #F5B800 linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.25) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.25) 50%,
+    rgba(0, 0, 0, 0.25) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 18px 18px;
+  animation: loaderStripes 1s linear infinite;
+  transition: width 0.12s ease-out;
+}
+
+@keyframes loaderStripes {
+  0% { background-position: 0 0; }
+  100% { background-position: 18px 0; }
+}
+
+/* ── Meta Footnote ──────────────────────────────────────── */
+.loader-meta-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.05em;
+  padding-top: 4px;
+}
+
+@media (max-width: 480px) {
+  .loader-body {
+    padding: 1.4rem 1.2rem 1.4rem;
+  }
+  .loader-meta-row {
+    font-size: 0.58rem;
+  }
+}

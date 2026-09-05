@@ -14,8 +14,52 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="styles.css?v=v20260904_static_portal">
+  <style id="critical-loader-css">
+    .brutalist-loader {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 99999;
+      background-color: #07070A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
 </head>
 <body>
+  <!-- ═══════════════ NEO-BRUTALIST PRELOADER ═══════════════ -->
+  <div id="brutalist-loader" class="brutalist-loader" aria-live="polite" aria-label="Loading DSA Got Latent">
+    <div class="loader-box">
+      <div class="loader-top-bar">
+        <span class="loader-sys-tag"><span class="loader-pulse-dot"></span>SYS_BOOT // DGL-2026</span>
+        <span class="loader-ready-tag">[LIVE_PORTAL]</span>
+      </div>
+      <div class="loader-body">
+        <div class="loader-logo-wrap">
+          <div class="loader-badge">THE STAGE IS SET</div>
+          <h1 class="loader-title">DSA'S GOT LATENT</h1>
+        </div>
+
+        <div class="loader-progress-wrap">
+          <div class="loader-pct-row">
+            <span class="loader-status-text" id="loader-status">INITIALIZING SYSTEM...</span>
+            <span class="loader-pct" id="loader-pct">0%</span>
+          </div>
+          <div class="loader-bar-outer">
+            <div class="loader-bar-fill" id="loader-bar-fill"></div>
+          </div>
+          <div class="loader-meta-row">
+            <span>[MEM: 64K OK]</span>
+            <span>// SEATS LIVE //</span>
+            <span>READY TO COMPETE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="app">
 
     <!-- ── Static Stage Background (Curtains, Spotlights & Fireflies) ── -->
