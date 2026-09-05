@@ -168,13 +168,6 @@ class BrutalistConfettiSystem {
       this.ctx.rotate((p.rotation * Math.PI) / 180);
       this.ctx.globalAlpha = Math.max(0, p.opacity);
 
-      // ── BOLD BRUTALIST BACKDROP SHADOW ────────────────────
-      // Crisp 3D drop shadow with hard contrast against any backdrop
-      this.ctx.shadowColor = 'rgba(0, 0, 0, 0.95)';
-      this.ctx.shadowBlur = 5;
-      this.ctx.shadowOffsetX = 4;
-      this.ctx.shadowOffsetY = 4;
-
       if (p.type === 'square') {
         // Neo-Brutalist stroked square
         this.ctx.fillStyle = p.color;
