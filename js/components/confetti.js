@@ -49,7 +49,8 @@ class BrutalistConfettiSystem {
    */
   fireCornerCannons(opts = {}) {
     if (!this.canvas) this.initCanvas();
-    const countPerSide = opts.countPerSide || 22; // Feather-light particle count
+    const isMobile = window.innerWidth < 768;
+    const countPerSide = opts.countPerSide ? Math.min(opts.countPerSide, isMobile ? 12 : opts.countPerSide) : (isMobile ? 10 : 22);
 
     // Bottom-Left Cannon
     for (let i = 0; i < countPerSide; i++) {
@@ -83,6 +84,7 @@ class BrutalistConfettiSystem {
   }
 
   spawnParticle(customProps = {}) {
+    const isMobile = window.innerWidth < 768;
     const isSquare = Math.random() > 0.5;
     this.particles.push({
       x: customProps.x || this.width / 2,
@@ -97,7 +99,7 @@ class BrutalistConfettiSystem {
       width: isSquare ? 10 : 16,
       height: isSquare ? 10 : 7,
       opacity: 1,
-      fadeSpeed: Math.random() * 0.018 + 0.015, // Fast ~1.5s cleanup
+      fadeSpeed: isMobile ? (Math.random() * 0.03 + 0.025) : (Math.random() * 0.018 + 0.015),
       wobble: Math.random() * 10,
       wobbleSpeed: 0.1
     });
@@ -173,7 +175,8 @@ class BrutalistConfettiSystem {
    */
   burstBehindLogo(opts = {}) {
     if (!this.canvas) this.initCanvas();
-    const count = opts.count || 45;
+    const isMobile = window.innerWidth < 768;
+    const count = opts.count ? Math.min(opts.count, isMobile ? 16 : opts.count) : (isMobile ? 14 : 40);
     const logo = document.querySelector('.brand-logo');
     let originX = this.width / 2;
     let originY = this.height * 0.44;

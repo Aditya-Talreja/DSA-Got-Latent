@@ -1,6 +1,6 @@
 /* ========================================================
-   DSA Got Latent — Responsive Breakpoints & Print
-   Single-Page Portal Layout
+   DSA Got Latent — Responsive Breakpoints & Mobile Optimization
+   Single-Page Portal Layout — Zero Overflow & 60fps Performance
    ======================================================== */
 
 @media (max-width: 768px) {
@@ -16,22 +16,214 @@
   }
 
   .brand-logo {
-    max-width: 85vw;
+    max-width: 88vw;
     max-height: 280px;
   }
 
   .page-section {
     margin-bottom: 1.5rem;
-    padding: 0 1rem;
+    padding: 0 0.5rem;
   }
 
   #team.page-section {
     margin-bottom: 0 !important;
   }
 
+  /* ── 1. Brutalist Card Container (Zero Overflow) ──────── */
+  .brutalist-card {
+    margin: 0 auto;
+    width: 100%;
+    /* Pure GPU box-shadow on mobile to guarantee smooth 60fps scrolling */
+    box-shadow:
+      6px 6px 0px var(--bc-shadow-color),
+      8px 8px 0px var(--bc-shadow-rim),
+      0 10px 25px rgba(0, 0, 0, 0.75) !important;
+  }
+
+  .brutalist-card:hover {
+    transform: none; /* Avoid sticky mobile hover state */
+  }
+
+  /* ── 2. Top Ribbon ─────────────────────────────────────── */
+  .brutalist-ribbon {
+    padding: 10px 14px;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── 3. Headline Block & "Register Your Team" Fit ──────── */
+  .brutalist-headline-block {
+    padding: 24px 16px 18px;
+  }
+
+  .headline-meta-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-bottom: 12px;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+  }
+
+  /* Scaled title so "REGISTER YOUR TEAM" fits comfortably inside the box */
+  .brutalist-title {
+    font-size: clamp(1.85rem, 8vw, 2.8rem) !important;
+    line-height: 1.05 !important;
+    letter-spacing: -0.02em !important;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .title-accent {
+    gap: 8px;
+  }
+
+  .accent-slashes {
+    font-size: 0.35em;
+  }
+
+  .brutalist-subheading {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 10px 0 16px;
+  }
+
+  /* ── 4. Card Body Padding ──────────────────────────────── */
+  .brutalist-body {
+    padding: 0 14px 22px;
+  }
+
+  /* ── 5. Metric Info Grid (About Card) ─────────────────── */
+  .brutalist-info-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .info-cell {
+    padding: 12px 10px;
+  }
+
+  .info-value {
+    font-size: 1.25rem;
+  }
+
+  /* ── 6. Fee Structure Grid (Registration Card) ────────── */
+  .brutalist-fee-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px;
+  }
+
+  .fee-cell {
+    padding: 12px 10px;
+  }
+
+  .fee-price {
+    font-size: 1.4rem;
+  }
+
+  /* ── 7. TOPICS GRID & SEATS / STATUS WRAPPING ──────────── */
+  /* Single column on mobile so items have full width */
+  .topics-grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px;
+  }
+
+  /* Wrap items cleanly so badges never spill out of the card */
+  .topic-item {
+    display: flex;
+    flex-wrap: wrap !important;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    gap: 6px 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .topic-num {
+    order: 1;
+    font-size: 0.68rem;
+    padding: 3px 6px;
+    flex-shrink: 0;
+  }
+
+  .topic-content {
+    order: 2;
+    flex: 1 1 calc(100% - 46px);
+    min-width: 0;
+  }
+
+  .topic-title {
+    font-size: 0.92rem;
+    word-break: break-word;
+  }
+
+  .topic-desc {
+    font-size: 0.64rem;
+    word-break: break-word;
+    line-height: 1.35;
+  }
+
+  /* Badges wrap onto the next line on narrow phones */
+  .topic-seats {
+    order: 3;
+    margin-left: auto;
+    font-size: 0.6rem;
+    padding: 3px 7px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .topic-status {
+    order: 4;
+    font-size: 0.58rem;
+    padding: 3px 7px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ── 8. Disclaimer & Register Button ──────────────────── */
+  .brutalist-disclaimer-box {
+    padding: 12px 14px;
+    margin-top: 14px;
+  }
+
+  .disclaimer-title {
+    font-size: 0.65rem;
+  }
+
+  .disclaimer-text {
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+
+  .reg-cta-block {
+    margin-top: 18px;
+  }
+
+  .brutalist-cta-btn {
+    padding: 14px 14px;
+    font-size: 0.88rem;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── 9. Footer Strip ──────────────────────────────────── */
+  .brutalist-footer-strip {
+    padding: 12px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .strip-tags {
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 0.65rem;
+  }
+
   .app-footer {
-    padding: 18px 16px 24px;
-    font-size: 0.78rem;
+    padding: 18px 14px 24px;
+    font-size: 0.76rem;
   }
 }
 
@@ -42,17 +234,39 @@
 
   .brand-logo {
     max-width: 92vw;
-    max-height: 240px;
+    max-height: 230px;
   }
 
   .page-section {
-    margin-bottom: 1rem;
-    padding: 0 0.75rem;
+    padding: 0 0.25rem;
   }
 
-  .app-footer {
-    padding: 16px 12px 20px;
-    font-size: 0.74rem;
+  .brutalist-title {
+    font-size: clamp(1.65rem, 8.2vw, 2.3rem) !important;
+  }
+
+  .brutalist-info-grid,
+  .brutalist-fee-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .fee-price {
+    font-size: 1.25rem;
+  }
+
+  .topic-item {
+    padding: 9px 10px;
+  }
+
+  .topic-title {
+    font-size: 0.86rem;
+  }
+
+  .topic-seats,
+  .topic-status {
+    font-size: 0.55rem;
+    padding: 2px 6px;
   }
 }
 
