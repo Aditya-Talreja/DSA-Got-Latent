@@ -37,7 +37,7 @@ The application is built around a bespoke **Cinematic Neo-Brutalist & Swiss Typo
    - Illuminated 3D stage brand logo centered under animated ambient spotlights.
    - Brutalist **`EXPLORE OUR EVENT ↓`** button anchored to smooth-scroll downward.
 
-2. **Event Showcase Card (`#event-brutalist`)**:
+2. **Event Showcase Card (`#event`)**:
    - Masthead ribbon (`DSA Community [DSAC]` // `DSA'S GOT LATENT`).
    - 4 Event Metric Pillars: `Team Size (1–4)`, `Location (AB1 Mini Auditorium)`, `Date (13 Sept 2026)`, `Time (2PM – 5PM)`.
    - Core premise manifesto card with golden accent bar.

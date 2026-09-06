@@ -7,10 +7,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
   width: 100%;
   height: 100%;
-  height: 100vh;
   height: 100lvh; /* Immune to dynamic mobile browser address bar collapse */
   min-height: 100%;
   z-index: 0;

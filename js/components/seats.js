@@ -12,8 +12,9 @@ let pollTimer = null;
 /**
  * Initialize the seat tracker.
  * @param {string} appsScriptUrl — Deployed Apps Script web-app URL
+ * @param {number} [pollInterval=5000] — Polling interval in ms
  */
-export function initSeatTracker(appsScriptUrl) {
+export function initSeatTracker(appsScriptUrl, pollInterval = POLL_INTERVAL) {
   if (!appsScriptUrl || appsScriptUrl === 'YOUR_APPS_SCRIPT_URL_HERE') {
     console.warn('[Seats] No Apps Script URL configured — seat tracking disabled.');
     return;
@@ -22,7 +23,7 @@ export function initSeatTracker(appsScriptUrl) {
   apiUrl = appsScriptUrl;
   // First fetch immediately, then start polling
   fetchSeats();
-  pollTimer = setInterval(fetchSeats, POLL_INTERVAL);
+  pollTimer = setInterval(fetchSeats, pollInterval || POLL_INTERVAL);
 }
 
 /**

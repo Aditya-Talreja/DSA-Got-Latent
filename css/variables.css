@@ -1,8 +1,7 @@
 /* ========================================================
    DSA Got Latent — Design System: Variables & Reset
    ======================================================== */
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap');
+/* Typography imported via preconnected <link> in index.html */
 
 /* ── Reset ──────────────────────────────────────────────── */
 *, *::before, *::after {

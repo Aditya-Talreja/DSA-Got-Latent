@@ -19,7 +19,7 @@ function init() {
   lockMobileBackground();
 
   // Live seat availability polling (fetches from Google Sheets via Apps Script)
-  initSeatTracker(CONFIG.APPS_SCRIPT_URL);
+  initSeatTracker(CONFIG.APPS_SCRIPT_URL, CONFIG.POLL_INTERVAL_MS);
 
   // Interactive Brutalist Confetti triggers
   const logo = $('.brand-logo');
@@ -53,9 +53,13 @@ function init() {
       const reg = $('#register');
       if (reg) reg.scrollIntoView({ behavior: 'smooth' });
     },
+    scrollToEvent() {
+      const el = $('#event') || $('#event-brutalist') || $('#about');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    },
     scrollToAbout() {
-      const about = $('#event-brutalist') || $('#about');
-      if (about) about.scrollIntoView({ behavior: 'smooth' });
+      const el = $('#event') || $('#event-brutalist') || $('#about');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
     },
     scrollToTeam() {
       const team = $('#team');

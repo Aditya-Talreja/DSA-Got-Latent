@@ -2,8 +2,7 @@
    DSA Got Latent — Neo-Brutalist Card — High-Aesthetics Edition
    Theme: Obsidian Noir · Electric Warm Gold · Crisp Swiss Type
    ======================================================== */
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@700;800;900&display=swap');
+/* Typography imported via preconnected <link> in index.html */
 
 /* ── Custom Properties ──────────────────────────────────── */
 :root {
@@ -24,6 +23,7 @@
 }
 
 /* ── Section Container ──────────────────────────────────── */
+#event,
 #event-brutalist {
   padding: 70px 24px 30px;
   scroll-margin-top: 40px;
@@ -1317,6 +1317,7 @@
 
 /* ── Responsive Refinements ─────────────────────────────── */
 @media (max-width: 768px) {
+  #event,
   #event-brutalist {
     padding: 60px 16px 80px;
   }
