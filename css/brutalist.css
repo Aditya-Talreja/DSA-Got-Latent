@@ -763,6 +763,24 @@
   text-transform: uppercase;
 }
 
+.fee-time {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--bc-gold);
+  background: rgba(245, 184, 0, 0.08);
+  border: 1px solid rgba(245, 184, 0, 0.28);
+  padding: 3px 7px;
+  border-radius: 1px;
+  width: fit-content;
+  text-transform: uppercase;
+  margin-top: 3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
 /* ── 10 Topics Section ──────────────────────────────────── */
 .topics-section {
   display: flex;

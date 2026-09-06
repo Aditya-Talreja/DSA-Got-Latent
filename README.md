@@ -48,11 +48,11 @@ The application is built around a bespoke **Cinematic Neo-Brutalist & Swiss Typo
 
 3. **Registration Portal Card (`#register`)**:
    - 4-Tier Pricing Grid:
-     - `01 / SOLO`: **₹29** (1 Contender)
-     - `02 / DUO`: **₹49** (2 Innovators)
-     - `03 / TRIO`: **₹69** (3 Innovators)
-     - `04 / SQUAD`: **₹89** (4 Innovators)
-   - 10-Topic Curated Challenge Grid ready for domain tracks.
+     - `01 / SOLO`: **₹29** (1 Contender, 2 Minutes)
+     - `02 / DUO`: **₹49** (2 Innovators, 3 Minutes)
+     - `03 / TRIO`: **₹69** (3 Innovators, 4 Minutes)
+     - `04 / SQUAD`: **₹89** (4 Innovators, 5 Minutes)
+   - 10-Topic Curated Challenge Grid with directions (Two Pointer, Sliding Window, Binary Search, Linked List, Stack and Queue, Hashing, Tries, Greedy Approaches, Heaps, Binary Trees).
    - Standout allocation disclaimer (`Teams per topic are limited, register fast to avail your preferred topic`).
    - Direct CTA button: **`REGISTER VIA GOOGLE FORMS ↗`**.
 

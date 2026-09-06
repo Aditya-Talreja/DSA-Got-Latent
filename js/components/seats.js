@@ -46,6 +46,30 @@ async function fetchSeats() {
 }
 
 /**
+ * Find matching topic in API data by exact or normalized name.
+ */
+function findTopicMatch(topics, topicName) {
+  if (!topicName || !Array.isArray(topics)) return null;
+  const target = topicName.trim().toLowerCase();
+
+  // 1. Direct exact match
+  const direct = topics.find(t => t.topic && t.topic.trim().toLowerCase() === target);
+  if (direct) return direct;
+
+  // 2. Resilient normalized match (handles '&' vs 'and', plurals, spacing)
+  const norm = str => str.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]/g, '');
+  const normTarget = norm(target);
+  const baseTarget = normTarget.replace(/s$/, '');
+
+  return topics.find(t => {
+    if (!t.topic) return false;
+    const normT = norm(t.topic);
+    const baseT = normT.replace(/s$/, '');
+    return normT === normTarget || baseT === baseTarget || normT.startsWith(baseTarget) || baseTarget.startsWith(normT);
+  }) || null;
+}
+
+/**
  * Update each .topic-item in the DOM based on API data.
  * @param {Array<{topic: string, capacity: number, registered: number, available: number}>} topics
  */
@@ -54,9 +78,7 @@ function updateTopicGrid(topics) {
 
   topicItems.forEach(item => {
     const topicName = item.getAttribute('data-topic');
-    const match = topics.find(t =>
-      t.topic.trim().toLowerCase() === topicName.trim().toLowerCase()
-    );
+    const match = findTopicMatch(topics, topicName);
 
     if (!match) return; // No data for this topic yet
 
@@ -71,7 +93,7 @@ function updateTopicGrid(topics) {
         seatsEl.textContent = 'FULL';
         seatsEl.classList.add('seats-full');
         seatsEl.classList.remove('seats-low');
-      } else if (available <= 3) {
+      } else if (available <= 2) {
         seatsEl.textContent = `${available}/${capacity}`;
         seatsEl.classList.add('seats-low');
         seatsEl.classList.remove('seats-full');
