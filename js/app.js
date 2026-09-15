@@ -4,7 +4,6 @@
 
 import { $ } from './utils/dom.js';
 import { createParticles, initSpotlights, lockMobileBackground } from './components/background.js';
-import { initSeatTracker } from './components/seats.js';
 import { initPreloader } from './components/loader.js';
 import { burstConfetti, fireCornerCannons, burstBehindLogo } from './components/confetti.js';
 import { CONFIG } from './config.js';
@@ -17,9 +16,6 @@ function init() {
   createParticles();
   initSpotlights();
   lockMobileBackground();
-
-  // Live seat availability polling (fetches from Google Sheets via Apps Script)
-  initSeatTracker(CONFIG.APPS_SCRIPT_URL, CONFIG.POLL_INTERVAL_MS);
 
   // Interactive Brutalist Confetti triggers
   const logo = $('.brand-logo');
@@ -40,9 +36,35 @@ function init() {
   const regBtn = $('#btn-google-form');
   if (regBtn) {
     regBtn.addEventListener('click', () => {
-      burstConfetti({ count: 60, origin: { x: 0.5, y: 0.7 } });
+      const modal = document.getElementById('concluded-modal');
+      if (modal) modal.classList.add('is-open');
     });
   }
+
+  // Modal close — X button
+  const modalCloseBtn = $('#modal-close-btn');
+  if (modalCloseBtn) {
+    modalCloseBtn.addEventListener('click', () => {
+      const modal = document.getElementById('concluded-modal');
+      if (modal) modal.classList.remove('is-open');
+    });
+  }
+
+  // Modal close — clicking backdrop
+  const modalOverlay = document.getElementById('concluded-modal');
+  if (modalOverlay) {
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) modalOverlay.classList.remove('is-open');
+    });
+  }
+
+  // Modal close — Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const modal = document.getElementById('concluded-modal');
+      if (modal) modal.classList.remove('is-open');
+    }
+  });
 
   // Global helper methods for smooth navigation
   window._app = {

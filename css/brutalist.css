@@ -62,30 +62,6 @@
     0 20px 48px rgba(0, 0, 0, 0.95);
 }
 
-/* Corner Bracket Accents */
-.brutalist-card::before,
-.brutalist-card::after {
-  content: '';
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  pointer-events: none;
-  z-index: 10;
-}
-
-.brutalist-card::before {
-  top: 6px;
-  left: 6px;
-  border-top: 2px solid var(--bc-gold);
-  border-left: 2px solid var(--bc-gold);
-}
-
-.brutalist-card::after {
-  bottom: 6px;
-  right: 6px;
-  border-bottom: 2px solid var(--bc-gold);
-  border-right: 2px solid var(--bc-gold);
-}
 
 /* ── Top Masthead Ribbon ────────────────────────────────── */
 .brutalist-ribbon {
@@ -909,75 +885,11 @@
   transition: color 0.3s ease, background 0.3s ease, border-color 0.3s ease;
 }
 
-/* ── Live Seat Counter Badge ───────────────────────────── */
-.topic-seats {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--bc-text-high, #FAF5EB);
-  background: rgba(52, 211, 153, 0.12);
-  border: 1px solid rgba(52, 211, 153, 0.35);
-  padding: 3px 8px;
-  border-radius: 1px;
-  flex-shrink: 0;
-  min-width: 42px;
-  text-align: center;
-  transition: color 0.3s ease, background 0.3s ease, border-color 0.3s ease;
-}
-
-/* Low seats warning (≤ 3 remaining) */
-.topic-seats.seats-low {
-  color: #FBBF24;
-  background: rgba(251, 191, 36, 0.12);
-  border-color: rgba(251, 191, 36, 0.4);
-  animation: seat-pulse 1.8s ease-in-out infinite;
-}
-
-/* Full — no seats left */
-.topic-seats.seats-full {
-  color: #F87171;
-  background: rgba(248, 113, 113, 0.12);
-  border-color: rgba(248, 113, 113, 0.35);
-}
-
-/* ── Topic Full State (greyed-out) ─────────────────────── */
-.topic-item.topic-full {
-  opacity: 0.45;
-  pointer-events: none;
-  filter: grayscale(0.6);
-  border-color: rgba(255, 255, 255, 0.06);
-  background: rgba(20, 5, 5, 0.5);
-}
-
-.topic-item.topic-full:hover {
-  transform: none;
-  border-color: rgba(255, 255, 255, 0.06);
-  background: rgba(20, 5, 5, 0.5);
-}
-
-.topic-item.topic-full .topic-num {
-  color: rgba(255, 255, 255, 0.25);
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-.topic-item.topic-full .topic-title {
-  text-decoration: line-through;
-  text-decoration-color: rgba(248, 113, 113, 0.5);
-  color: rgba(250, 245, 235, 0.35);
-}
-
-.topic-item.topic-full .topic-status {
-  color: #F87171;
-  background: rgba(248, 113, 113, 0.12);
-  border-color: rgba(248, 113, 113, 0.3);
-}
-
-/* ── Seat Pulse Animation ──────────────────────────────── */
-@keyframes seat-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
+/* Post-event: REGISTERED badge */
+.topic-status.registered {
+  color: #4ADE80;
+  background: rgba(74, 222, 128, 0.08);
+  border-color: rgba(74, 222, 128, 0.3);
 }
 
 /* ── Highlighted Disclaimer Box ─────────────────────────── */
@@ -1487,3 +1399,375 @@
     font-size: 0.72rem !important;
   }
 }
+
+/* ══════════════════════════════════════════════════════════
+   POST-EVENT: CONCLUDED BANNER
+   ══════════════════════════════════════════════════════════ */
+.concluded-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(135deg, rgba(245, 184, 0, 0.08) 0%, rgba(245, 184, 0, 0.03) 100%);
+  border: 1.5px solid rgba(245, 184, 0, 0.4);
+  border-left: 4px solid var(--bc-gold);
+  border-radius: 2px;
+  padding: 16px 20px;
+  margin-top: 20px;
+  animation: concludedPulse 3s ease-in-out infinite;
+}
+
+@keyframes concludedPulse {
+  0%, 100% { border-left-color: var(--bc-gold); box-shadow: 0 0 0 rgba(245,184,0,0); }
+  50% { border-left-color: var(--bc-gold-bright); box-shadow: 0 0 12px rgba(245,184,0,0.2); }
+}
+
+
+.concluded-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.concluded-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--bc-gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.concluded-date {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--bc-text-muted);
+  letter-spacing: 0.06em;
+}
+
+/* ── Closed CTA Badge ─────────────────────────────────── */
+.concluded-badge {
+  background-color: rgba(220, 60, 60, 0.18) !important;
+  color: #FF6B6B !important;
+  border-color: rgba(220, 60, 60, 0.4) !important;
+}
+
+/* ── Disabled / Closed Button State ──────────────────── */
+.brutalist-cta-btn.brutalist-cta-closed {
+  background: transparent;
+  border: 2px solid rgba(220, 60, 60, 0.45);
+  color: #FF6B6B;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 rgba(220, 60, 60, 0.3);
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 18px 28px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.brutalist-cta-btn.brutalist-cta-closed:hover {
+  background: rgba(220, 60, 60, 0.08);
+  border-color: rgba(220, 60, 60, 0.7);
+  box-shadow: 6px 6px 0 rgba(220, 60, 60, 0.4);
+}
+
+.brutalist-cta-btn.brutalist-cta-closed .cta-arrow {
+  font-size: 1.1rem;
+  transition: none;
+}
+
+/* Cancel the base arrow nudge for the closed button */
+.brutalist-cta-btn.brutalist-cta-closed:hover .cta-arrow {
+  transform: none;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   POST-EVENT: CONCLUDED MODAL
+   ══════════════════════════════════════════════════════════ */
+.concluded-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 7, 10, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 99998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.concluded-modal-overlay.is-open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.concluded-modal-card {
+  width: 100%;
+  max-width: 540px;
+  background-color: var(--bc-bg-main);
+  border: 2px solid rgba(245, 184, 0, 0.35);
+  box-shadow:
+    10px 10px 0px #000,
+    12px 12px 0px var(--bc-gold),
+    0 20px 60px rgba(0, 0, 0, 0.9);
+  transform: translateY(24px) scale(0.97);
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.concluded-modal-overlay.is-open .concluded-modal-card {
+  transform: translateY(0) scale(1);
+}
+
+
+/* ── Modal Top Bar ─────────────────────────────────────── */
+.modal-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  border-bottom: 1px solid rgba(245, 184, 0, 0.15);
+  background: rgba(245, 184, 0, 0.04);
+}
+
+.modal-sys-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--bc-text-muted);
+  letter-spacing: 0.08em;
+}
+
+.modal-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--bc-gold);
+  animation: modalPulse 1.6s ease-in-out infinite;
+}
+
+.modal-pulse-dot.closed-dot {
+  background: #FF6B6B;
+}
+
+@keyframes modalPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: 1.5px solid rgba(245, 184, 0, 0.3);
+  color: var(--bc-text-muted);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Space Mono', monospace;
+  border-radius: 2px;
+}
+
+.modal-close-btn:hover {
+  border-color: rgba(245, 184, 0, 0.7);
+  color: var(--bc-gold);
+  background: rgba(245, 184, 0, 0.08);
+}
+
+/* ── Modal Body ────────────────────────────────────────── */
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 32px 36px;
+  gap: 20px;
+}
+
+
+.modal-content-block {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  text-align: center;
+}
+
+.modal-badge-row {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bc-gold);
+  background: rgba(245, 184, 0, 0.1);
+  border: 1px solid rgba(245, 184, 0, 0.3);
+  padding: 4px 12px;
+  border-radius: 2px;
+}
+
+.modal-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--bc-text-high);
+  line-height: 1.15;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.modal-divider {
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, rgba(245,184,0,0.4), transparent);
+  border-radius: 999px;
+}
+
+.modal-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: var(--bc-text-body);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.modal-desc strong {
+  color: var(--bc-text-high);
+  font-weight: 600;
+}
+
+/* ── Info Row ──────────────────────────────────────────── */
+.modal-info-row {
+  display: flex;
+  gap: 0;
+  border: 1px solid rgba(245, 184, 0, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.modal-info-cell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 12px 10px;
+  border-right: 1px solid rgba(245, 184, 0, 0.15);
+  background: rgba(245, 184, 0, 0.03);
+  text-align: center;
+}
+
+.modal-info-cell:last-child {
+  border-right: none;
+}
+
+.modal-info-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--bc-text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.modal-info-val {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--bc-text-high);
+  letter-spacing: 0.04em;
+}
+
+.modal-info-val.closed-text {
+  color: #FF6B6B;
+}
+
+/* ── Follow Text & Instagram Button ────────────────────── */
+.modal-follow-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  color: var(--bc-text-muted);
+  margin: 0;
+}
+
+.modal-insta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  border: 2px solid rgba(245, 184, 0, 0.4);
+  color: var(--bc-gold);
+  padding: 13px 28px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 4px 4px 0 rgba(245, 184, 0, 0.25);
+  width: 100%;
+}
+
+.modal-insta-btn:hover {
+  background: rgba(245, 184, 0, 0.1);
+  border-color: var(--bc-gold);
+  box-shadow: 6px 6px 0 rgba(245, 184, 0, 0.4);
+  transform: translate(-2px, -2px);
+  color: var(--bc-gold-bright);
+}
+
+/* ── Responsive Modal ──────────────────────────────────── */
+@media (max-width: 480px) {
+  .concluded-modal-card {
+    max-width: 100%;
+  }
+
+  .modal-body {
+    padding: 24px 20px 28px;
+  }
+
+  .modal-title {
+    font-size: 1.55rem;
+  }
+
+  .modal-info-row {
+    flex-direction: column;
+  }
+
+  .modal-info-cell {
+    border-right: none;
+    border-bottom: 1px solid rgba(245, 184, 0, 0.15);
+  }
+
+  .modal-info-cell:last-child {
+    border-bottom: none;
+  }
+
+  .concluded-banner {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+}
+
