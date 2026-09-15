@@ -1506,6 +1506,9 @@
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 .concluded-modal-overlay.is-open {
@@ -1526,6 +1529,10 @@
   transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
   position: relative;
   overflow: hidden;
+  max-height: 90vh;
+  max-height: 90dvh;
+  display: flex;
+  flex-direction: column;
 }
 
 .concluded-modal-overlay.is-open .concluded-modal-card {
@@ -1541,6 +1548,10 @@
   padding: 12px 18px;
   border-bottom: 1px solid rgba(245, 184, 0, 0.15);
   background: rgba(245, 184, 0, 0.04);
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 
 .modal-sys-tag {
@@ -1599,6 +1610,11 @@
   align-items: center;
   padding: 32px 32px 36px;
   gap: 20px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  flex: 1;
+  min-height: 0;
 }
 
 
@@ -1739,8 +1755,16 @@
 
 /* ── Responsive Modal ──────────────────────────────────── */
 @media (max-width: 480px) {
+  .concluded-modal-overlay {
+    padding: 16px;
+    align-items: flex-start;
+    padding-top: 5vh;
+  }
+
   .concluded-modal-card {
     max-width: 100%;
+    max-height: 85vh;
+    max-height: 85dvh;
   }
 
   .modal-body {
@@ -1769,5 +1793,14 @@
     text-align: center;
     gap: 10px;
   }
+}
+
+/* ── Body scroll lock when modal is open ──────────────── */
+body.modal-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
 }
 

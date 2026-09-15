@@ -33,37 +33,50 @@ function init() {
     });
   }
 
+  // ── Modal scroll-lock helpers ──────────────────────────
+  let savedScrollY = 0;
+
+  function openModal() {
+    const modal = document.getElementById('concluded-modal');
+    if (!modal) return;
+    savedScrollY = window.scrollY;
+    document.body.classList.add('modal-open');
+    document.body.style.top = `-${savedScrollY}px`;
+    modal.classList.add('is-open');
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('concluded-modal');
+    if (!modal) return;
+    modal.classList.remove('is-open');
+    document.body.classList.remove('modal-open');
+    document.body.style.top = '';
+    window.scrollTo(0, savedScrollY);
+  }
+
+  // ── Modal triggers ────────────────────────────────────
   const regBtn = $('#btn-google-form');
   if (regBtn) {
-    regBtn.addEventListener('click', () => {
-      const modal = document.getElementById('concluded-modal');
-      if (modal) modal.classList.add('is-open');
-    });
+    regBtn.addEventListener('click', openModal);
   }
 
   // Modal close — X button
   const modalCloseBtn = $('#modal-close-btn');
   if (modalCloseBtn) {
-    modalCloseBtn.addEventListener('click', () => {
-      const modal = document.getElementById('concluded-modal');
-      if (modal) modal.classList.remove('is-open');
-    });
+    modalCloseBtn.addEventListener('click', closeModal);
   }
 
   // Modal close — clicking backdrop
   const modalOverlay = document.getElementById('concluded-modal');
   if (modalOverlay) {
     modalOverlay.addEventListener('click', (e) => {
-      if (e.target === modalOverlay) modalOverlay.classList.remove('is-open');
+      if (e.target === modalOverlay) closeModal();
     });
   }
 
   // Modal close — Escape key
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      const modal = document.getElementById('concluded-modal');
-      if (modal) modal.classList.remove('is-open');
-    }
+    if (e.key === 'Escape') closeModal();
   });
 
   // Global helper methods for smooth navigation
