@@ -40,8 +40,8 @@ function init() {
     const modal = document.getElementById('concluded-modal');
     if (!modal) return;
     savedScrollY = window.scrollY;
+    document.documentElement.classList.add('modal-open');
     document.body.classList.add('modal-open');
-    document.body.style.top = `-${savedScrollY}px`;
     modal.classList.add('is-open');
   }
 
@@ -49,9 +49,11 @@ function init() {
     const modal = document.getElementById('concluded-modal');
     if (!modal) return;
     modal.classList.remove('is-open');
+    document.documentElement.classList.remove('modal-open');
     document.body.classList.remove('modal-open');
-    document.body.style.top = '';
-    window.scrollTo(0, savedScrollY);
+    if (window.scrollY !== savedScrollY) {
+      window.scrollTo({ top: savedScrollY, behavior: 'instant' });
+    }
   }
 
   // ── Modal triggers ────────────────────────────────────

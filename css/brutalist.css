@@ -593,7 +593,9 @@
   border: 2px solid #000000 !important;
   box-shadow:
     6px 6px 0px #000000,
-    8px 8px 0px rgba(245, 184, 0, 0.5) !important;
+    8px 8px 0px var(--bc-gold),
+    0 12px 28px rgba(0, 0, 0, 0.9),
+    0 0 20px rgba(245, 184, 0, 0.25) !important;
   border-radius: 0 !important;
   transform: translateX(-50%) !important;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
@@ -607,14 +609,19 @@
   transform: translateX(-50%) translateY(-3px) !important;
   box-shadow:
     8px 8px 0px #000000,
-    10px 10px 0px rgba(245, 184, 0, 0.7) !important;
+    11px 11px 0px var(--bc-gold),
+    0 18px 36px rgba(0, 0, 0, 0.95),
+    0 0 30px rgba(245, 184, 0, 0.45) !important;
   background: #FFE066 !important;
   color: #000000 !important;
 }
 
 .brutalist-cue:active {
   transform: translateX(-50%) translateY(2px) !important;
-  box-shadow: 2px 2px 0px #000000 !important;
+  box-shadow:
+    2px 2px 0px #000000,
+    3px 3px 0px var(--bc-gold),
+    0 6px 14px rgba(0, 0, 0, 0.8) !important;
 }
 
 .brutalist-cue .scroll-arrow {
@@ -1796,11 +1803,8 @@
 }
 
 /* ── Body scroll lock when modal is open ──────────────── */
+html.modal-open,
 body.modal-open {
   overflow: hidden;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
 }
 
