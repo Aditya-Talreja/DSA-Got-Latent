@@ -54,53 +54,6 @@
   -webkit-transform: translate3d(0, 0, 0);
 }
 
-/* Dark stage mask overlay with spotlight cutout holes */
-.spotlight-mask-layer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  min-height: 100%;
-  pointer-events: none;
-  z-index: 2;
-  background-color: rgba(6, 3, 3, 0.78); /* Dark stage atmosphere */
-  mix-blend-mode: multiply;
-  overflow: hidden;
-  transform: translate3d(0, 0, 0);
-  -webkit-transform: translate3d(0, 0, 0);
-}
-
-.spotlight-hole {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  will-change: transform;
-  background: radial-gradient(circle at center,
-    #ffffff 0%,
-    #ffffff 22%,
-    rgba(255, 255, 255, 0.92) 40%,
-    rgba(255, 255, 255, 0.55) 60%,
-    rgba(255, 255, 255, 0.18) 78%,
-    transparent 100%
-  );
-  filter: blur(8px);
-}
-
-#spotlight-1 {
-  width: 500px;
-  height: 500px;
-}
-
-#spotlight-2 {
-  width: 580px;
-  height: 580px;
-}
-
-#spotlight-3 {
-  width: 440px;
-  height: 440px;
-}
 
 /* ── Floating Gold Particles (Fireflies) ─────────────────── */
 .particles {
@@ -117,31 +70,27 @@
   background: #ffd700;
   opacity: 0.8;
   animation: fireflyGlow ease-in-out infinite;
-  box-shadow: 0 0 4px 1.5px #ffd700,
-              0 0 10px 2.5px rgba(255, 215, 0, 0.45);
+  /* Static box-shadow: does not animate, no per-frame paint cost */
+  box-shadow: 0 0 5px 2px #ffd700, 0 0 12px 3px rgba(255, 215, 0, 0.45);
   pointer-events: none;
 }
 
-/* Firefly: subtle, delicate pulse and drift */
+/* Firefly: only opacity + transform — both compositor-accelerated, zero paint cost */
 @keyframes fireflyGlow {
   0%, 100% {
     opacity: 0.55;
     transform: translate3d(0, 0, 0) scale(0.85);
-    box-shadow: 0 0 3px 1px #ffd700, 0 0 7px 2px rgba(255, 215, 0, 0.35);
   }
   25% {
     opacity: 0.85;
     transform: translate3d(6px, -10px, 0) scale(1.15);
-    box-shadow: 0 0 5px 2px #ffd700, 0 0 12px 3px rgba(255, 215, 0, 0.5);
   }
   50% {
     opacity: 0.5;
     transform: translate3d(-8px, -18px, 0) scale(0.8);
-    box-shadow: 0 0 3px 1px #ffd700, 0 0 6px 2px rgba(255, 215, 0, 0.3);
   }
   75% {
     opacity: 0.8;
     transform: translate3d(10px, -8px, 0) scale(1.1);
-    box-shadow: 0 0 4px 1.5px #ffd700, 0 0 10px 2.5px rgba(255, 215, 0, 0.45);
   }
 }

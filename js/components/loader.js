@@ -4,7 +4,7 @@
    and fires the celebration confetti explosion.
    ======================================================== */
 
-import { fireCornerCannons, burstConfetti, burstBehindLogo } from './confetti.js';
+import { burstBehindLogo } from './confetti.js';
 
 const STATUS_MESSAGES = [
   'INITIALIZING SYSTEM...',

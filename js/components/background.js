@@ -2,7 +2,7 @@
    DSA Got Latent — Background Stage Effects (Fireflies & Spotlights)
    ======================================================== */
 
-import { $, $$ } from '../utils/dom.js';
+import { $ } from '../utils/dom.js';
 
 export function createParticles() {
   const container = $('#particles');
@@ -25,108 +25,135 @@ export function createParticles() {
 }
 
 export function initSpotlights() {
-  const spotlights = $$('.spotlight-hole, .spotlight');
-  if (!spotlights.length) return;
+  // ── Canvas-based spotlight system ──────────────────────────────────────────
+  // Replaces DOM element + filter:blur + mix-blend-mode approach (which breaks
+  // GPU compositing). Uses a single canvas with globalCompositeOperation to punch
+  // soft-edged holes in a dark overlay, with smooth lerp movement instead of
+  // setTimeout jitter — zero DOM style recalculations, full 60fps.
 
-  const vw = window.innerWidth;
-  const vh = window.innerHeight;
+  const container = document.querySelector('.stage-bg-container');
+  if (!container) return;
 
-  spotlights.forEach((el, index) => {
-    // 1. PIN IMMEDIATELY at initial stage coordinates with NO transition
-    // Dynamic centering based on element's actual rendered size (scaled on mobile)
-    const size = el.offsetWidth || (index === 1 ? 580 : index === 2 ? 440 : 500);
-    const half = size / 2;
+  // Disable the old DOM mask layer — canvas takes over
+  const maskLayer = document.getElementById('spotlight-mask-layer');
+  if (maskLayer) {
+    maskLayer.style.backgroundColor = 'transparent';
+    maskLayer.style.mixBlendMode = 'normal';
+    // Hide legacy DOM spotlight holes (canvas renders them)
+    maskLayer.querySelectorAll('.spotlight-hole').forEach(el => {
+      el.style.display = 'none';
+    });
+  }
 
-    const initialPositions = [
-      { x: vw * 0.5 - half, y: vh * 0.42 - half },  // Center logo
-      { x: vw * 0.22 - half, y: vh * 0.46 - half }, // Stage Left
-      { x: vw * 0.78 - half, y: vh * 0.38 - half }  // Stage Right
-    ];
+  // Create the canvas overlay at the same z-index as the old mask layer
+  const canvas = document.createElement('canvas');
+  canvas.id = 'spotlight-canvas';
+  canvas.style.cssText = [
+    'position:absolute', 'top:0', 'left:0',
+    'width:100%', 'height:100%',
+    'pointer-events:none', 'z-index:2'
+  ].join(';');
+  container.appendChild(canvas);
 
-    const initPos = initialPositions[index % initialPositions.length];
-    let currentX = initPos.x;
-    let currentY = initPos.y;
+  const ctx = canvas.getContext('2d');
+  let W = 0, H = 0;
 
-    el.style.transition = 'none';
-    el.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
-    void el.offsetHeight; // Flush layout so it's guaranteed locked in place
+  function resize() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    canvas.width  = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    // setTransform resets + scales fresh — avoids compounding scale on resize
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
 
-    // Pick a new major destination on stage
-    function pickNewTarget() {
-      const curSize = el.offsetWidth || size;
-      const curVw = window.innerWidth;
-      const curVh = window.innerHeight;
-      const isMobile = curVw <= 768;
+  // 3 spotlights: cx/cy in CSS px, radius, lerp speed, current target
+  const spots = [
+    { cx: 0, cy: 0, tx: 0, ty: 0, r: 250, spd: 0.028 },  // Center
+    { cx: 0, cy: 0, tx: 0, ty: 0, r: 285, spd: 0.022 },  // Stage Left
+    { cx: 0, cy: 0, tx: 0, ty: 0, r: 215, spd: 0.034 },  // Stage Right
+  ];
 
-      // 50% bias towards center stage / golden logo
-      const biasCenter = Math.random() < 0.5;
-      let targetX, targetY;
+  // Seed initial positions
+  function seed() {
+    spots[0].cx = spots[0].tx = W * 0.50;  spots[0].cy = spots[0].ty = H * 0.42;
+    spots[1].cx = spots[1].tx = W * 0.22;  spots[1].cy = spots[1].ty = H * 0.46;
+    spots[2].cx = spots[2].tx = W * 0.78;  spots[2].cy = spots[2].ty = H * 0.38;
+  }
+  seed();
 
-      if (biasCenter) {
-        const spreadX = isMobile ? 120 : 260;
-        const spreadY = isMobile ? 80 : 180;
-        targetX = (curVw / 2 - curSize / 2) + (Math.random() * spreadX - spreadX / 2);
-        targetY = (curVh * 0.42 - curSize / 2) + (Math.random() * spreadY - spreadY / 2);
-      } else {
-        targetX = Math.random() * (curVw - curSize * 0.4) - curSize * 0.3;
-        targetY = Math.random() * (curVh - curSize * 0.4) - curSize * 0.3;
-      }
-
-      return { targetX, targetY };
+  function pickTarget(s) {
+    const isMobile = W <= 768;
+    if (Math.random() < 0.55) {
+      // Bias toward center stage
+      const sx = isMobile ? 130 : 270, sy = isMobile ? 90 : 190;
+      s.tx = W * 0.5 + (Math.random() * sx - sx / 2);
+      s.ty = H * 0.42 + (Math.random() * sy - sy / 2);
+    } else {
+      s.tx = W * 0.08 + Math.random() * W * 0.84;
+      s.ty = H * 0.08 + Math.random() * H * 0.74;
     }
+  }
 
-    // ── STEP 1: FAST MOVE TO NEW LOCATION WITH VISIBLE TRAVEL (~0.8s - 1.1s) ──
-    function sweepToNewTarget() {
-      const { targetX, targetY } = pickNewTarget();
-      currentX = targetX;
-      currentY = targetY;
-
-      const moveDuration = (Math.random() * 300 + 800) / 1000; // 0.8s - 1.1s
-      el.style.transition = `transform ${moveDuration}s cubic-bezier(0.22, 1, 0.36, 1)`;
-      el.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
-
-      // After arrival, begin the jittering phase
-      setTimeout(() => {
-        startJitterPhase(currentX, currentY);
-      }, moveDuration * 1000);
-    }
-
-    // ── STEP 2: STAY AT PLACE & JITTER AROUND IT ─────────────
-    function startJitterPhase(baseX, baseY) {
-      // Jitter 6 to 10 times around this spot
-      const jitterCount = Math.floor(Math.random() * 5) + 6;
-      let step = 0;
-
-      function doJitter() {
-        if (step >= jitterCount) {
-          // Finished jittering at this place! Sweep smoothly to a new place!
-          sweepToNewTarget();
-          return;
-        }
-
-        step++;
-        // Snappy hunting micro-offsets around the spot (proportional on mobile)
-        const isMobile = window.innerWidth <= 768;
-        const jxRange = isMobile ? 22 : 46;
-        const jyRange = isMobile ? 18 : 36;
-        const jx = (Math.random() - 0.5) * jxRange;
-        const jy = (Math.random() - 0.5) * jyRange;
-        const jitterSpeed = (Math.random() * 60 + 150) / 1000; // 0.15s - 0.21s fast jitter
-
-        el.style.transition = `transform ${jitterSpeed}s cubic-bezier(0.25, 0.46, 0.45, 0.94)`;
-        el.style.transform = `translate3d(${baseX + jx}px, ${baseY + jy}px, 0)`;
-
-        setTimeout(doJitter, jitterSpeed * 1000 + Math.random() * 50);
-      }
-
-      doJitter();
-    }
-
-    // Start with jitter in their initial resting spot, then sweep smoothly!
+  // Each spotlight picks a new target on its own staggered interval
+  spots.forEach((s, i) => {
+    // Stagger first picks so they don't all move simultaneously
     setTimeout(() => {
-      startJitterPhase(currentX, currentY);
-    }, index * 400);
+      pickTarget(s);
+      setInterval(() => pickTarget(s), 3200 + i * 600 + Math.random() * 800);
+    }, i * 900 + 600);
   });
+
+  function drawFrame() {
+    ctx.clearRect(0, 0, W, H);
+
+    // ── 1. Fill dark stage atmosphere ──────────────────────────
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = 'rgba(6, 3, 3, 0.78)';
+    ctx.fillRect(0, 0, W, H);
+
+    // ── 2. Punch spotlight holes via destination-out ───────────
+    // destination-out erases the dark fill wherever we draw,
+    // letting the background image show through — same visual result
+    // as the old mix-blend-mode:multiply + white circle, but GPU-friendly.
+    ctx.globalCompositeOperation = 'destination-out';
+
+    spots.forEach(s => {
+      // Smooth lerp toward target — no discrete jumps, no setTimeout chains
+      s.cx += (s.tx - s.cx) * s.spd;
+      s.cy += (s.ty - s.cy) * s.spd;
+
+      const r = s.r;
+      const grd = ctx.createRadialGradient(s.cx, s.cy, 0, s.cx, s.cy, r);
+
+      // Multi-stop falloff curve tuned to match filter:blur(8px) softness
+      // on a ~250-285px circle. Derived from Gaussian kernel approximation.
+      grd.addColorStop(0.00, 'rgba(0,0,0,1.00)');
+      grd.addColorStop(0.28, 'rgba(0,0,0,0.97)');
+      grd.addColorStop(0.48, 'rgba(0,0,0,0.88)');
+      grd.addColorStop(0.63, 'rgba(0,0,0,0.70)');
+      grd.addColorStop(0.76, 'rgba(0,0,0,0.45)');
+      grd.addColorStop(0.86, 'rgba(0,0,0,0.22)');
+      grd.addColorStop(0.93, 'rgba(0,0,0,0.08)');
+      grd.addColorStop(0.97, 'rgba(0,0,0,0.02)');
+      grd.addColorStop(1.00, 'rgba(0,0,0,0.00)');
+
+      ctx.fillStyle = grd;
+      ctx.beginPath();
+      ctx.arc(s.cx, s.cy, r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // Reset composite for next frame
+    ctx.globalCompositeOperation = 'source-over';
+
+    requestAnimationFrame(drawFrame);
+  }
+
+  drawFrame();
 }
 
 /**

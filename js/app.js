@@ -6,7 +6,6 @@ import { $ } from './utils/dom.js';
 import { createParticles, initSpotlights, lockMobileBackground } from './components/background.js';
 import { initPreloader } from './components/loader.js';
 import { burstConfetti, fireCornerCannons, burstBehindLogo } from './components/confetti.js';
-import { CONFIG } from './config.js';
 
 // Launch Neo-Brutalist preloader immediately
 initPreloader();

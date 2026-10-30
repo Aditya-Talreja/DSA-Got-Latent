@@ -1,7 +1,9 @@
 /* ========================================================
-   DSA Got Latent — Neo-Brutalist Confetti Engine (Ultra-Light Edition)
-   Hardware-accelerated, single-pass canvas poppers with zero CPU lag.
+   DSA Got Latent — Neo-Brutalist Confetti Engine (Performance Edition)
+   Hardware-accelerated, batched-draw canvas poppers — zero CPU lag.
    ======================================================== */
+
+const MAX_PARTICLES = 70; // Hard cap: prevents frame-rate drops from burst accumulation
 
 class BrutalistConfettiSystem {
   constructor() {
@@ -39,9 +41,9 @@ class BrutalistConfettiSystem {
     this.height = window.innerHeight;
     // Cap pixel ratio to 1.5 to prevent massive 4K canvas redraw lag
     const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-    this.canvas.width = this.width * dpr;
-    this.canvas.height = this.height * dpr;
-    this.ctx.scale(dpr, dpr);
+    this.canvas.width = Math.round(this.width * dpr);
+    this.canvas.height = Math.round(this.height * dpr);
+    this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
   /**
@@ -50,7 +52,8 @@ class BrutalistConfettiSystem {
   fireCornerCannons(opts = {}) {
     if (!this.canvas) this.initCanvas();
     const isMobile = window.innerWidth < 768;
-    const countPerSide = opts.countPerSide ? Math.min(opts.countPerSide, isMobile ? 12 : opts.countPerSide) : (isMobile ? 10 : 22);
+    // Reduced from 22 → 18 per side on desktop (still looks great, less GPU stress)
+    const countPerSide = opts.countPerSide ? Math.min(opts.countPerSide, isMobile ? 12 : opts.countPerSide) : (isMobile ? 10 : 18);
 
     // Bottom-Left Cannon
     for (let i = 0; i < countPerSide; i++) {
@@ -61,7 +64,8 @@ class BrutalistConfettiSystem {
         y: this.height,
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed * 1.2,
-        gravity: 0.55
+        gravity: 0.55,
+        isMobile
       });
     }
 
@@ -74,7 +78,8 @@ class BrutalistConfettiSystem {
         y: this.height,
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed * 1.2,
-        gravity: 0.55
+        gravity: 0.55,
+        isMobile
       });
     }
 
@@ -84,7 +89,11 @@ class BrutalistConfettiSystem {
   }
 
   spawnParticle(customProps = {}) {
-    const isMobile = window.innerWidth < 768;
+    // Hard cap: silently discard new particles when at max to avoid accumulation lag
+    if (this.particles.length >= MAX_PARTICLES) return;
+
+    // Accept isMobile from caller to avoid repeated window.innerWidth reads per particle
+    const isMobile = customProps.isMobile !== undefined ? customProps.isMobile : window.innerWidth < 768;
     const isSquare = Math.random() > 0.5;
     this.particles.push({
       x: customProps.x || this.width / 2,
@@ -110,6 +119,7 @@ class BrutalistConfettiSystem {
     const count = opts.count || 25;
     const originX = (opts.origin && opts.origin.x !== undefined) ? opts.origin.x * this.width : this.width / 2;
     const originY = (opts.origin && opts.origin.y !== undefined) ? opts.origin.y * this.height : this.height * 0.55;
+    const isMobile = window.innerWidth < 768; // resolve once per burst
 
     for (let i = 0; i < count; i++) {
       const angle = (Math.random() * Math.PI) + Math.PI;
@@ -118,7 +128,8 @@ class BrutalistConfettiSystem {
         x: originX,
         y: originY,
         vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed * 1.1
+        vy: Math.sin(angle) * speed * 1.1,
+        isMobile
       });
     }
 
@@ -128,8 +139,10 @@ class BrutalistConfettiSystem {
   }
 
   loop() {
-    this.ctx.clearRect(0, 0, this.width, this.height);
+    const ctx = this.ctx;
+    ctx.clearRect(0, 0, this.width, this.height);
 
+    // ── Physics pass (no draw calls) ──────────────────────────────
     for (let i = this.particles.length - 1; i >= 0; i--) {
       const p = this.particles[i];
       p.vx *= p.drag;
@@ -142,30 +155,44 @@ class BrutalistConfettiSystem {
 
       if (p.opacity <= 0 || p.y > this.height + 40) {
         this.particles.splice(i, 1);
-        continue;
       }
+    }
 
-      this.ctx.save();
-      this.ctx.translate(p.x, p.y);
-      this.ctx.rotate((p.rotation * Math.PI) / 180);
-      this.ctx.globalAlpha = Math.max(0, p.opacity);
+    // ── Batched render pass: group by color to minimize GPU state switches ──
+    const byColor = {};
+    for (let i = 0; i < this.particles.length; i++) {
+      const p = this.particles[i];
+      if (!byColor[p.color]) byColor[p.color] = [];
+      byColor[p.color].push(p);
+    }
 
-      // Ultra-fast pure geometric rendering (no font metrics or text measurement)
-      const wobbleWidth = p.width * Math.sin(p.wobble);
-      this.ctx.fillStyle = p.color;
-      this.ctx.fillRect(-wobbleWidth / 2, -p.height / 2, wobbleWidth, p.height);
-      this.ctx.lineWidth = 1;
-      this.ctx.strokeStyle = '#000000';
-      this.ctx.strokeRect(-wobbleWidth / 2, -p.height / 2, wobbleWidth, p.height);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = '#000000';
 
-      this.ctx.restore();
+    for (const color in byColor) {
+      const group = byColor[color];
+      ctx.fillStyle = color; // set once per color group instead of once per particle
+
+      for (let i = 0; i < group.length; i++) {
+        const p = group[i];
+        const wobbleWidth = p.width * Math.sin(p.wobble);
+        if (wobbleWidth === 0) continue;
+
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, p.opacity);
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rotation * Math.PI) / 180);
+        ctx.fillRect(-wobbleWidth / 2, -p.height / 2, wobbleWidth, p.height);
+        ctx.strokeRect(-wobbleWidth / 2, -p.height / 2, wobbleWidth, p.height);
+        ctx.restore();
+      }
     }
 
     if (this.particles.length > 0) {
       this.animationFrame = requestAnimationFrame(() => this.loop());
     } else {
       this.animationFrame = null;
-      this.ctx.clearRect(0, 0, this.width, this.height);
+      ctx.clearRect(0, 0, this.width, this.height);
     }
   }
 
@@ -176,7 +203,8 @@ class BrutalistConfettiSystem {
   burstBehindLogo(opts = {}) {
     if (!this.canvas) this.initCanvas();
     const isMobile = window.innerWidth < 768;
-    const count = opts.count ? Math.min(opts.count, isMobile ? 16 : opts.count) : (isMobile ? 14 : 40);
+    // Reduced from 40 → 30 desktop default (fires at page load — most sensitive moment)
+    const count = opts.count ? Math.min(opts.count, isMobile ? 14 : opts.count) : (isMobile ? 12 : 30);
     const logo = document.querySelector('.brand-logo');
     let originX = this.width / 2;
     let originY = this.height * 0.44;
@@ -196,7 +224,8 @@ class BrutalistConfettiSystem {
         y: originY + (Math.random() * 40 - 20),
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed - 3.5, // gentle upward bias
-        gravity: 0.45
+        gravity: 0.45,
+        isMobile
       });
     }
 

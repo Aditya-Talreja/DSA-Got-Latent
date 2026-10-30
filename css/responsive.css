@@ -68,25 +68,6 @@ html, body {
     -webkit-backface-visibility: hidden !important;
   }
 
-  /* ── 1c. Mobile Spotlights (Relatively Scaled) ──────────── */
-  .spotlight-hole {
-    filter: blur(6px);
-  }
-
-  #spotlight-1 {
-    width: clamp(230px, 56vw, 320px);
-    height: clamp(230px, 56vw, 320px);
-  }
-
-  #spotlight-2 {
-    width: clamp(260px, 64vw, 360px);
-    height: clamp(260px, 64vw, 360px);
-  }
-
-  #spotlight-3 {
-    width: clamp(200px, 48vw, 280px);
-    height: clamp(200px, 48vw, 280px);
-  }
 
   /* ── 1d. Lightweight Mobile Fireflies (Cap at 9) ───────── */
   .particle:nth-child(n+10) {
@@ -603,25 +584,6 @@ html, body {
     max-height: 220px;
   }
 
-  /* ── 1c. Compact Mobile Spotlights ─────────────────────── */
-  .spotlight-hole {
-    filter: blur(5px);
-  }
-
-  #spotlight-1 {
-    width: clamp(190px, 54vw, 250px);
-    height: clamp(190px, 54vw, 250px);
-  }
-
-  #spotlight-2 {
-    width: clamp(220px, 62vw, 280px);
-    height: clamp(220px, 62vw, 280px);
-  }
-
-  #spotlight-3 {
-    width: clamp(170px, 46vw, 220px);
-    height: clamp(170px, 46vw, 220px);
-  }
 
   .page-section {
     padding: 0 5px !important;
@@ -769,7 +731,7 @@ html, body {
   .bg-layer,
   .bg-overlay,
   .particles,
-  .spotlight-mask-layer,
+  #spotlight-canvas,
   .scroll-cue,
   .brutalist-cue {
     display: none !important;
