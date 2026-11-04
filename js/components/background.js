@@ -58,6 +58,21 @@ export function initSpotlights() {
   const ctx = canvas.getContext('2d');
   let W = 0, H = 0;
 
+  // 3 spotlights: cx/cy in CSS px, radius, lerp speed, current target
+  // Desktop radii vs mobile (≤768px) — smaller circles so they don't fill the screen
+  const desktopR = [250, 285, 215];
+  const mobileR  = [120, 135, 100];
+
+  function spotRadius(i) {
+    return W <= 768 ? mobileR[i] : desktopR[i];
+  }
+
+  const spots = [
+    { cx: 0, cy: 0, tx: 0, ty: 0, r: desktopR[0], spd: 0.028 },  // Center
+    { cx: 0, cy: 0, tx: 0, ty: 0, r: desktopR[1], spd: 0.022 },  // Stage Left
+    { cx: 0, cy: 0, tx: 0, ty: 0, r: desktopR[2], spd: 0.034 },  // Stage Right
+  ];
+
   function resize() {
     W = window.innerWidth;
     H = window.innerHeight;
@@ -66,16 +81,11 @@ export function initSpotlights() {
     canvas.height = Math.round(H * dpr);
     // setTransform resets + scales fresh — avoids compounding scale on resize
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    // Update spotlight radii for current viewport (mobile vs desktop)
+    spots.forEach((s, i) => { s.r = spotRadius(i); });
   }
   resize();
   window.addEventListener('resize', resize);
-
-  // 3 spotlights: cx/cy in CSS px, radius, lerp speed, current target
-  const spots = [
-    { cx: 0, cy: 0, tx: 0, ty: 0, r: 250, spd: 0.028 },  // Center
-    { cx: 0, cy: 0, tx: 0, ty: 0, r: 285, spd: 0.022 },  // Stage Left
-    { cx: 0, cy: 0, tx: 0, ty: 0, r: 215, spd: 0.034 },  // Stage Right
-  ];
 
   // Seed initial positions
   function seed() {
